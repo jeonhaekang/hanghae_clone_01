@@ -6,7 +6,7 @@ const Input = (props) => {
   const { Border, B_radius } = props;
 
   //size, position category
-  const { rows, width, height, margin, padding } = props;
+  const { rows, width, height, margin, padding, is_caret } = props;
 
   //setting, event category
   const { label, _onChange, _defaultValue, _ref, type, value, placeholder } =
@@ -21,6 +21,7 @@ const Input = (props) => {
   const styles = {
     Border,
     B_radius,
+    is_caret,
 
     rows,
     width,
@@ -72,6 +73,7 @@ Input.defaultProps = {
   label: null,
   onChange: false,
   placeholder: null,
+  is_caret: null,
   type: "text",
 
   Border: "1px gray solid",
@@ -96,6 +98,7 @@ const Wrap = styled.div`
 const In = styled.input`
   border: ${(props) => props.Border};
   border-radius: ${(props) => props.B_radius};
+  caret-color: ${(props) => props.is_caret};
   justify-content: center;
 
   height: ${(props) => props.height};

@@ -36,7 +36,7 @@ function App() {
 }
 
 const Container = styled.div`
-  width: 412px;
+  width: 100%;
   min-height: 100vh;
 `;
 

@@ -65,7 +65,7 @@ const AspectInner = styled.div`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   position: relative;
-  padding-top: 75%;
+  padding-top: 100%;
   overflow: hidden;
   background-image: url("${(props) => props.src}");
   background-size: cover;

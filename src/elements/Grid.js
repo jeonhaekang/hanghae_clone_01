@@ -12,12 +12,31 @@ const Grid = (props) => {
   const { BG_c } = props;
 
   //flex category
-  const { is_flex, flex_direction, flex_wrap, justify_content, align_items } =
-    props;
+  const {
+    is_flex,
+    flex_direction,
+    flex_wrap,
+    justify_content,
+    align_items,
+    gap,
+  } = props;
 
   //size, position category
-  const { width, height, margin, padding, position, top, bottom, z_index } =
-    props;
+  const {
+    width,
+    height,
+    margin,
+    padding,
+    position,
+    transform,
+    left,
+    right,
+    top,
+    bottom,
+    z_index,
+    font_size,
+    color,
+  } = props;
 
   //event category
   const { _onClick } = props;
@@ -42,15 +61,21 @@ const Grid = (props) => {
     justify_content,
     align_items,
     flex_wrap,
+    gap,
 
     width,
     height,
     margin,
     padding,
     position,
+    transform,
+    left,
+    right,
     top,
     bottom,
     z_index,
+    font_size,
+    color,
   };
 
   return (
@@ -71,6 +96,7 @@ Grid.defaultProps = {
   flex_wrap: "wrap",
   align_items: "center",
   justify_content: null,
+  gap: null,
 
   box_shadow: null,
 
@@ -82,9 +108,14 @@ Grid.defaultProps = {
   padding: false,
   margin: false,
   position: null,
+  transform: null,
+  left: null,
+  right: null,
   top: null,
   bottom: null,
   z_index: null,
+  font_size: null,
+  color: null,
 
   _onClick: null,
 };
@@ -97,15 +128,23 @@ const GridBox = styled.div`
   flex-direction: ${(props) => props.flex_direction};
   flex-wrap: ${(props) => props.flex_wrap};
   box-shadow: ${(props) => props.box_shadow};
+  gap: ${(props) => props.gap};
   //size, position
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   padding: ${(props) => props.padding};
   margin: ${(props) => props.margin};
   position: ${(props) => props.position};
+  transform: ${(props) => props.transform};
+  left: ${(props) => props.left};
+  right: ${(props) => props.right};
   top: ${(props) => props.top};
   bottom: ${(props) => props.bottom};
   z-index: ${(props) => props.z_index};
+  & * {
+    font-size: ${(props) => props.font_size};
+    color: ${(props) => props.color};
+  }
   //border
   border: ${(props) => props.Border};
   border-left: ${(props) => props.B_left};

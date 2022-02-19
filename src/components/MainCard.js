@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Grid, TextLabel, Button } from "../elements/Index";
 import test from "../images/test.jpeg";
-import { IoHeartOutline, IoHeart } from "react-icons/io5";
+import { IoHeartOutline } from "react-icons/io5";
 
 const MainCard = (props) => {
   return (

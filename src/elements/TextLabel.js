@@ -43,6 +43,7 @@ TextLabel.defaultProps = {
 };
 
 const P = styled.label`
+
   font-size: ${(props) => props.F_size};
   color: ${(props) => props.F_color};
   font-weight: ${(props) => props.F_weight};

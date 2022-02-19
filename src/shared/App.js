@@ -25,7 +25,7 @@ function App() {
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={Signup} />
           <Route path="/main" exact component={Main} />
-
+          
           {/* 게시글 */}
           <Route path="/post" exact component={Post} />
           <Route path="/edit" exact component={Edit} />

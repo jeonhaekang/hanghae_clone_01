@@ -48,6 +48,7 @@ const Start = (props) => {
             Border="0"
             B_radius="5px"
             BG_color="#FF7E36"
+            padding="10px"
           >
             <Text F_size="17px" F_weight="bold" F_color="white">
               시작하기

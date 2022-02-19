@@ -4,7 +4,7 @@ import { getCookie } from "./Cookie";
 const token = getCookie("authorization");
 
 const instance = axios.create({
-  //baseURL: "http://3.39.0.192",
+  baseURL: "http://13.125.53.14:8080",
 });
 
 instance.defaults.headers.common["authorization"] = token;

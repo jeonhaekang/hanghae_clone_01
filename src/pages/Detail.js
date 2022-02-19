@@ -1,7 +1,5 @@
 import React from "react";
-import { Grid, TextLabel, Button, Image } from "../elements/Index";
-import styled from "styled-components";
-import test from "../images/test.jpeg";
+import { Grid } from "../elements/Index";
 import DetailUserCard from "../components/DetailUserCard";
 import DetailContentCard from "../components/DetailContentCard";
 import DetailFooter from "../components/DetailFooter";

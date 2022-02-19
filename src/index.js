@@ -12,7 +12,7 @@ import { Provider } from "react-redux";
 import store from "./redux/configStore";
 
 ReactDOM.render(
-  <Provider stroe={store}>
+  <Provider store={store}>
     <BrowserRouter>
       <App />
     </BrowserRouter>

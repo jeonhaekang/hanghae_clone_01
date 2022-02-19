@@ -3,11 +3,13 @@ import thunk from "redux-thunk";
 import { createBrowserHistory } from "history";
 import { connectRouter } from "connected-react-router";
 
+import User from "./modules/User";
+
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
   // 모듈 적어주세요.
-
+  user: User,
   router: connectRouter(history),
 });
 

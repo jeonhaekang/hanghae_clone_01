@@ -1,8 +1,10 @@
 import React, {useState} from "react";
 
 import { useDispatch } from "react-redux";
+import { history } from "../redux/configStore";
 
 import { Grid, Input, Text, Button } from '../elements/Index';
+import { userActions } from "../redux/modules/User";
 
 const Login = (props) => {
   const dispatch = useDispatch();
@@ -21,7 +23,7 @@ const Login = (props) => {
       return;
     }
     // dispatch
-    console.log('dispatch')
+    dispatch(userActions.loginDB(id,pwd))
   }
 
   return (
@@ -63,9 +65,10 @@ const Login = (props) => {
       />
     </Grid>
     {/* 로그인 버튼 */}
-    <Grid padding='16px 0 40px' B_bottom='1px solid #000' width='100%'>
+    <Grid padding='16px 0 20px' B_bottom='1px solid #000' width='100%'>
       <Button 
       width='100%'
+      height='30px'
       _onClick={submit}  
       Border='1px solid rgba(0,0,0,0.07)' 
       B_radius='10px' 
@@ -74,14 +77,15 @@ const Login = (props) => {
       >로그인</Button>
     </Grid>
     {/* 회원가입 안내 문구 */}
-    <Grid padding='16px 0 0'>
+    <Grid padding='8px 0 0'>
       <Text F_color='#FF7E36' >아직 회원이 아니라면?</Text>
     </Grid>
     {/* 회원가입 이동 페이지 버튼 */}
     <Grid padding='8px 0 0' width='100%'>
       <Button 
       width='100%'
-      _onClick={()=>{console.log('회원가입으로 이동')}}  
+      height='30px'
+      _onClick={()=>{history.push('/signup')}}  
       Border='1px solid rgba(0,0,0,0.07)' 
       B_radius='10px' 
       BG_color='#FF7E36'

@@ -13,11 +13,14 @@ import {
   Start,
 } from "../pages/Index";
 import { Route } from "react-router-dom";
+import { ConnectedRouter } from "connected-react-router";
+import {history} from '../redux/configStore'
 
 function App() {
   return (
     <React.Fragment>
       <Container>
+        <ConnectedRouter history={history}>
         <Route path="/" exact component={Start} />
         <Route path="/login" exact component={Login} />
         <Route path="/signup" exact component={Signup} />
@@ -30,6 +33,7 @@ function App() {
 
         {/* 내정보 */}
         <Route path="/mypage" exact component={MyPage} />
+        </ConnectedRouter>
       </Container>
     </React.Fragment>
   );

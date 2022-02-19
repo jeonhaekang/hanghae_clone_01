@@ -6,4 +6,4 @@ import Button from "./Button";
 import Spinner from "./Spinner";
 import Upload from "./Upload";
 
-export { Spinner, Input, Grid, Image, Text, Button, Upload };
+export { Spinner, Input, Grid, Image, Text, Button, Upload};

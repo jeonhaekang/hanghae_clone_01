@@ -58,8 +58,8 @@ const Button = (props) => {
 };
 
 Button.defaultProps = {
-  height: "50px",
-  width: "100px",
+  height: null,
+  width: null,
   margin: null,
 
   position: null,

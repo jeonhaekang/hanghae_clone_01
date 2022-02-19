@@ -7,5 +7,23 @@ import MyPage from "./MyPage";
 import Post from "./Post";
 import Signup from "./Signup";
 import Start from "./Start";
+import ProfileModify from "./ProfileModify";
+import MyPageBuy from "./MyPageBuy";
+import MyPageSell from "./MyPageSell";
+import MyPageLike from "./MyPageLike";
 
-export { Detail, Edit, List, Login, Main, MyPage, Post, Signup, Start };
+export {
+  Detail,
+  Edit,
+  List,
+  Login,
+  Main,
+  MyPage,
+  Post,
+  Signup,
+  Start,
+  ProfileModify,
+  MyPageBuy,
+  MyPageSell,
+  MyPageLike,
+};

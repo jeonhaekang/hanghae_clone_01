@@ -155,7 +155,6 @@ const Signup = (props) => {
           <Grid _onClick={selAdd} padding='16px 0' B_bottom='1px solid #ddd' >서울특별시</Grid>
           <Grid _onClick={selAdd} padding='16px 0' B_bottom='1px solid #ddd' >울산광역시</Grid>
           <Grid _onClick={selAdd} padding='16px 0' B_bottom='1px solid #ddd' >광주광역시</Grid>
-          <Grid _onClick={selAdd} padding='16px 0' B_bottom='1px solid #ddd' >광주광역시</Grid>
           <Grid _onClick={selAdd} padding='16px 0' B_bottom='1px solid #ddd' >인천광역시</Grid>
           <Grid _onClick={selAdd} padding='16px 0' B_bottom='1px solid #ddd' >부산광역시</Grid>
           <Grid _onClick={selAdd} padding='16px 0' B_bottom='1px solid #ddd' >대전광역시</Grid>

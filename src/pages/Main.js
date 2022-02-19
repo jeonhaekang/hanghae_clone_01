@@ -2,6 +2,7 @@ import React from "react";
 import MainCard from "../components/MainCard";
 import { Grid, TextLabel, Button } from "../elements/Index";
 import Header from "../shared/Header";
+import Footer from "../shared/Footer";
 import {
   IoOptionsOutline,
   IoCheckmarkCircleOutline,
@@ -57,9 +58,8 @@ const Main = (props) => {
         <MainCard />
         <MainCard />
       </Grid>
-      <Grid position="fixed" bottom="20px" right="20px">
-        <EditButton onClick={() => history.push("/post")}> +</EditButton>
-      </Grid>
+      <EditButton onClick={() => history.push("/post")}> +</EditButton>
+      <Footer />
     </React.Fragment>
   );
 };
@@ -79,7 +79,7 @@ const EditButton = styled.button`
   font-size: 50px;
   color: white;
   position: fixed;
-  bottom: 20px;
+  bottom: 90px;
   right: 20px;
   & :hover {
     animation: ${EditAnimation} 0.2s;

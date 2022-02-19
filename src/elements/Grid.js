@@ -35,6 +35,7 @@ const Grid = (props) => {
     bottom,
     z_index,
     font_size,
+    font_weight,
     color,
   } = props;
 
@@ -75,6 +76,7 @@ const Grid = (props) => {
     bottom,
     z_index,
     font_size,
+    font_weight,
     color,
   };
 
@@ -115,6 +117,7 @@ Grid.defaultProps = {
   bottom: null,
   z_index: null,
   font_size: null,
+  font_weight: null,
   color: null,
 
   _onClick: null,
@@ -143,6 +146,7 @@ const GridBox = styled.div`
   z-index: ${(props) => props.z_index};
   & * {
     font-size: ${(props) => props.font_size};
+    font-weight: ${(props) => props.font_weight};
     color: ${(props) => props.color};
   }
   //border

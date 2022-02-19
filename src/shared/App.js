@@ -11,6 +11,10 @@ import {
   Post,
   Signup,
   Start,
+  ProfileModify,
+  MyPageBuy,
+  MyPageSell,
+  MyPageLike,
 } from "../pages/Index";
 import { Route } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
@@ -25,7 +29,7 @@ function App() {
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={Signup} />
           <Route path="/main" exact component={Main} />
-          
+
           {/* 게시글 */}
           <Route path="/post" exact component={Post} />
           <Route path="/edit" exact component={Edit} />
@@ -33,6 +37,10 @@ function App() {
 
           {/* 내정보 */}
           <Route path="/mypage" exact component={MyPage} />
+          <Route path="/profileModify" exact component={ProfileModify} />
+          <Route path="/mypage/buy" exact component={MyPageBuy} />
+          <Route path="/mypage/sell" exact component={MyPageSell} />
+          <Route path="/mypage/like" exact component={MyPageLike} />
         </ConnectedRouter>
       </Container>
     </React.Fragment>

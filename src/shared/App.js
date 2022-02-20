@@ -4,7 +4,6 @@ import styled from "styled-components";
 import {
   Detail,
   Edit,
-  List,
   Login,
   Main,
   MyPage,
@@ -15,6 +14,7 @@ import {
   MyPageBuy,
   MyPageSell,
   MyPageLike,
+  Review,
 } from "../pages/Index";
 import { Route } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
@@ -41,6 +41,7 @@ function App() {
           <Route path="/mypage/buy" exact component={MyPageBuy} />
           <Route path="/mypage/sell" exact component={MyPageSell} />
           <Route path="/mypage/like" exact component={MyPageLike} />
+          <Route path="/review" exact component={Review} />
         </ConnectedRouter>
       </Container>
     </React.Fragment>

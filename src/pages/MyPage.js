@@ -69,7 +69,7 @@ const MyPage = (props) => {
           flex_direction="column"
           gap="10px"
           _onClick={() => {
-            history.push("/mypage/buy");
+            history.push("/mypage/sell");
           }}
         >
           <Icon src={sellIcon} />
@@ -82,7 +82,7 @@ const MyPage = (props) => {
           flex_direction="column"
           gap="10px"
           _onClick={() => {
-            history.push("/mypage/sell");
+            history.push("/mypage/buy");
           }}
         >
           <Icon src={buyIcon} />

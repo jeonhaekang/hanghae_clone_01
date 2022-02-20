@@ -1,14 +1,21 @@
 import React from "react";
 import styled from "styled-components";
-import { Grid, TextLabel, Text } from "../elements/Index";
+import { Grid, TextLabel } from "../elements/Index";
 import test from "../images/test.jpeg";
-import { IoHeartOutline } from "react-icons/io5";
+import { IoHeartOutline, IoHeart } from "react-icons/io5";
 import { IoEllipsisVertical } from "react-icons/io5";
 import ReactModal from "react-modal";
 import "../shared/App.css";
 
 const MainCard = (props) => {
+  const { page } = props;
   const [state, setState] = React.useState(false);
+  const [likeState, setLikeState] = React.useState(false);
+
+  const likeChange = () => {
+    setLikeState(!likeState);
+  };
+
   return (
     <React.Fragment>
       <Grid
@@ -52,17 +59,30 @@ const MainCard = (props) => {
           <TextLabel>0</TextLabel>
         </Grid>
 
-        <Grid
-          _onClick={() => {
-            setState(true);
-          }}
-          position="absolute"
-          top="15px"
-          right="10px"
-        >
-          <IoEllipsisVertical />
+        <Grid position="absolute" top="15px" right="10px">
+          {page === "like" ? (
+            <Grid
+              font_size="23px"
+              _onClick={() => {
+                likeChange();
+              }}
+              color={likeState ? "#ff7e36" : "#4D5159"}
+            >
+              {likeState ? <IoHeart /> : <IoHeartOutline />}
+            </Grid>
+          ) : (
+            <Grid
+              _onClick={() => {
+                setState(true);
+              }}
+            >
+              <IoEllipsisVertical />
+            </Grid>
+          )}
         </Grid>
       </Grid>
+
+      {/* 수정 모달 & 좋아요 기능 */}
       <ReactModal
         state={state}
         isOpen={state}
@@ -76,20 +96,38 @@ const MainCard = (props) => {
           },
           content: {
             borderRadius: 0,
-            top: "calc(100% - 300px)",
-            height: "300px",
-            width:"100%",
+            top: "calc(100% - 200px)",
+            height: "200px",
+            width: "100%",
             left: 0,
-            
+            padding: 0,
+
             transition: "0.3s",
           },
         }}
-      ></ReactModal>
+      >
+        <Grid
+          is_flex
+          flex_direction="column"
+          justify_content="space-around"
+          align_items="flex-start"
+          padding="20px"
+          height="100%"
+          font_size="16px"
+          font_weight="550"
+        >
+          <Grid>판매상태 변경</Grid>
+          <Grid>게시글 수정</Grid>
+          <Grid>삭제</Grid>
+        </Grid>
+      </ReactModal>
     </React.Fragment>
   );
 };
 
-MainCard.defaultProps = {};
+MainCard.defaultProps = {
+  page: null,
+};
 
 const AspectInner = styled.div`
   position: relative;

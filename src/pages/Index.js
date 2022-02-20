@@ -11,6 +11,7 @@ import ProfileModify from "./ProfileModify";
 import MyPageBuy from "./MyPageBuy";
 import MyPageSell from "./MyPageSell";
 import MyPageLike from "./MyPageLike";
+import Review from "./Review";
 
 export {
   Detail,
@@ -26,4 +27,5 @@ export {
   MyPageBuy,
   MyPageSell,
   MyPageLike,
+  Review,
 };

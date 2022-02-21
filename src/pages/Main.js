@@ -10,9 +10,11 @@ import {
 } from "react-icons/io5";
 import styled, { keyframes } from "styled-components";
 import { history } from "../redux/configStore";
+import { useSelector } from "react-redux";
 
 const Main = (props) => {
   const [state, setState] = React.useState(true);
+  const postList = useSelector((state) => state.post.list);
 
   return (
     <React.Fragment>
@@ -50,13 +52,9 @@ const Main = (props) => {
         </Grid>
       </Grid>
       <Grid>
-        <MainCard />
-        <MainCard />
-        <MainCard />
-        <MainCard />
-        <MainCard />
-        <MainCard />
-        <MainCard />
+        {postList.map((el, i) => {
+          return <MainCard {...el} key={i} />;
+        })}
       </Grid>
       <EditButton onClick={() => history.push("/post")}> +</EditButton>
       <Footer />

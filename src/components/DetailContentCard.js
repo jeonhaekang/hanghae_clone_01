@@ -2,6 +2,7 @@ import React from "react";
 import { Grid, TextLabel } from "../elements/Index";
 
 const DetailContentCard = (props) => {
+  const { title, content, category, likeCnt, viewCnt } = props;
   return (
     <React.Fragment>
       <Grid
@@ -14,17 +15,19 @@ const DetailContentCard = (props) => {
       >
         <Grid>
           <TextLabel F_weight="bold" F_size="25px">
-            티비나온 강아지
+            {title}
           </TextLabel>
         </Grid>
         <Grid margin="5px 0" color="#4D5159">
-          <TextLabel>야생 강아지</TextLabel>
+          <TextLabel>{category}</TextLabel>
         </Grid>
         <Grid margin="10px 0 30px 0">
-          <TextLabel F_size="17px">티비나온 강아지</TextLabel>
+          <TextLabel F_size="17px">{content}</TextLabel>
         </Grid>
         <Grid color="#4D5159">
-          <TextLabel F_size="13px">관심 1 ∙ 조회 20</TextLabel>
+          <TextLabel F_size="13px">
+            관심 {likeCnt} ∙ 조회 {viewCnt}
+          </TextLabel>
         </Grid>
       </Grid>
     </React.Fragment>

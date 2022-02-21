@@ -20,24 +20,38 @@ instance.interceptors.request.use(function (config) {
 
 const apis = {
   // 회원가입
-  signup: (id,nick,pwd,address) => instance.post('/user/signup',{
-    username: id,
-    nickname: nick,
-    password: pwd,
-    address: address,
-  }),
+  signup: (id, nick, pwd, address) =>
+    instance.post("/user/signup", {
+      username: id,
+      nickname: nick,
+      password: pwd,
+      address: address,
+    }),
 
   // 아이디 중복 체크
-  idcheck: (id) => instance.post('/user/idcheck',{username: id}),
-  
+  idcheck: (id) => instance.post("/user/idcheck", { username: id }),
+
   // 로그인
-  login: (id, pwd) => instance.post('/user/login',{username: id, password: pwd}),
-  
+  login: (id, pwd) =>
+    instance.post("/user/login", { username: id, password: pwd }),
+
   // 로그인 체크
-  check: () => instance.get('/user/'),
+  check: () => instance.get("/user/"),
 
   // 게시글 작성
-  posting: (data) => instance.post('/post',data),
+  posting: (data) => instance.post("/post", data),
+
+  // 게시글 수정
+  modifyPost: (postId, data) => instance.put("/post/" + postId, data),
+
+  // 게시글 불러오기
+  posts: () => instance.get("/post"),
+
+  // 게시글 삭제
+  postDel: (postId) => instance.delete("/post/" + postId),
+
+  // 게시글 한개 불러오기
+  getOnePost: (postId) => instance.get("/post/" + postId),
 };
 
 export default apis;

@@ -10,11 +10,18 @@ import {
 } from "react-icons/io5";
 import styled, { keyframes } from "styled-components";
 import { history } from "../redux/configStore";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { postActions } from "../redux/modules/Post";
 
 const Main = (props) => {
+  const dispatch = useDispatch();
   const [state, setState] = React.useState(true);
   const postList = useSelector((state) => state.post.list);
+  console.log(postList);
+  
+  React.useEffect(() => {
+    dispatch(postActions.loadPostDB());
+  }, []);
 
   return (
     <React.Fragment>

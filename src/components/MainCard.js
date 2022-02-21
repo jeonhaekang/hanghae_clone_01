@@ -6,10 +6,15 @@ import { IoHeartOutline, IoHeart } from "react-icons/io5";
 import { IoEllipsisVertical } from "react-icons/io5";
 import ReactModal from "react-modal";
 import "../shared/App.css";
+import { useDispatch } from "react-redux";
+import { postActions } from "../redux/modules/Post";
+import { history } from "../redux/configStore";
 
 const MainCard = (props) => {
-  console.log(props);
-  const { page, userInfo, postId, title, price, likeCnt, state, image } = props;
+  const dispatch = useDispatch();
+
+  const { page, user, postId, title, price, likeCnt, state } = props;
+  const image = [test];
 
   const [ModalState, setModalState] = React.useState(false);
   const [likeState, setLikeState] = React.useState(false);
@@ -17,7 +22,17 @@ const MainCard = (props) => {
   const likeChange = () => {
     setLikeState(!likeState);
   };
-  console.log(image[0]);
+
+  const delPost = () => {
+    if (window.confirm("정말로 삭제하시겠습니까?")) {
+      dispatch(postActions.delPostDB(postId));
+    }
+  };
+
+  const postStateSet = () => {
+    dispatch(postActions.postStateSetDB(postId, state));
+    setModalState(false);
+  };
 
   return (
     <React.Fragment>
@@ -29,7 +44,7 @@ const MainCard = (props) => {
         align_items="flex-start"
         position="relative"
       >
-        <Grid width="30%">
+        <Grid width="30%" _onClick={() => history.push("/detail/" + postId)}>
           <AspectInner src={image[0]} />
         </Grid>
         <Grid
@@ -42,7 +57,7 @@ const MainCard = (props) => {
           <TextLabel F_size="17px" F_weight="bold">
             {title}
           </TextLabel>
-          <TextLabel F_color="#4D5159">{userInfo.address}</TextLabel>
+          <TextLabel F_color="#4D5159">{user.address}</TextLabel>
           <Grid is_flex gap="10px">
             {state && (
               <Grid
@@ -121,9 +136,11 @@ const MainCard = (props) => {
           font_size="16px"
           font_weight="550"
         >
-          <Grid>판매상태 변경</Grid>
-          <Grid>게시글 수정</Grid>
-          <Grid>삭제</Grid>
+          <Grid _onClick={() => postStateSet()}>판매상태 변경</Grid>
+          <Grid _onClick={() => history.push("/edit/" + postId)}>
+            게시글 수정
+          </Grid>
+          <Grid _onClick={delPost}>삭제</Grid>
         </Grid>
       </ReactModal>
     </React.Fragment>

@@ -1,9 +1,11 @@
 import React from "react";
 import { Grid, TextLabel, Image } from "../elements/Index";
-import test from "../images/test.jpeg";
 import Rate from "../components/Rate";
 
 const DetailUserCard = (props) => {
+  const { user } = props;
+
+  console.log(user);
   return (
     <Grid
       B_bottom="1px solid rgba(0,0,0,0.1)"
@@ -13,7 +15,7 @@ const DetailUserCard = (props) => {
     >
       <Grid is_flex gap="10px">
         <Grid>
-          <Image shape="circle" size="45" src={test} />
+          <Image shape="circle" size="45" src={user.profileImage} />
         </Grid>
         <Grid
           is_flex
@@ -21,12 +23,12 @@ const DetailUserCard = (props) => {
           align_items="flex-start"
           gap="5px"
         >
-          <TextLabel F_weight="bold">godgooddog</TextLabel>
-          <TextLabel>노원구 상계</TextLabel>
+          <TextLabel F_weight="bold">{user.nickname}</TextLabel>
+          <TextLabel>{user.address}</TextLabel>
         </Grid>
       </Grid>
       <Grid>
-        <Rate />
+        <Rate rate={user.rate} />
       </Grid>
     </Grid>
   );

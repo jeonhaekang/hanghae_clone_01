@@ -8,7 +8,7 @@ import veryGood from "../images/rate/veryGood.png";
 import excellent from "../images/rate/excellent.png";
 
 const Rate = (props) => {
-  const rate = 61;
+  const { rate } = props;
   const [color, setColor] = React.useState("#1561a9");
   const [img, setImg] = React.useState(bad);
   const [active, setActive] = React.useState(false);

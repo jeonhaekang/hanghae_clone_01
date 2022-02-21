@@ -114,20 +114,6 @@ const ProfileModify = (props) => {
   );
 };
 
-const ProfileOuter = styled.div`
-  width: 120px;
-  height: 120px;
-`;
-
-const Profile = styled.div`
-  position: relative;
-  padding-top: 100%;
-  overflow: hidden;
-  background-image: url("${(props) => props.src}");
-  background-size: cover;
-  border-radius: 60px;
-`;
-
 const ProfileLabel = styled.label`
   width: 120px;
   height: 120px;

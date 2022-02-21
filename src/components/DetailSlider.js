@@ -6,6 +6,9 @@ import styled from "styled-components";
 import { Grid } from "../elements/Index";
 
 const DetailSlider = (props) => {
+  //const { image } = props;
+  const image = [test];
+
   const style = {
     showArrows: false,
     showThumbs: false,
@@ -15,12 +18,16 @@ const DetailSlider = (props) => {
   return (
     <React.Fragment>
       <Carousel {...style}>
-        <AspectInner src={test} />
-        <AspectInner src={test} />
-        <AspectInner src={test} />
+        {image.map((el, i) => {
+          return <AspectInner src={el} key={i} />;
+        })}
       </Carousel>
     </React.Fragment>
   );
+};
+
+DetailSlider.defaultProps = {
+  image: [],
 };
 
 const AspectInner = styled.div`

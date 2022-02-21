@@ -13,6 +13,7 @@ import { postActions } from "../redux/modules/Post";
 import { imgActions } from "../redux/modules/Image";
 
 const Post = (props) => {
+  const category = ["가전", "노트북", "데스크탑", "장난감", "패션", "집화"];
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(imgActions.initPre());
@@ -51,7 +52,7 @@ const Post = (props) => {
       title: title,
       content: content,
       category: cat,
-      image: files,
+      //image: files,
       price: price,
     };
 
@@ -115,28 +116,24 @@ const Post = (props) => {
             onRequestClose={props.clearSelectedOption}
             ariaHideApp={false}
             contentLabel="Selected Option"
+            style={{
+              overlay: {
+                zIndex: 3,
+              },
+            }}
           >
-            <Grid
-              _onClick={selectCat}
-              padding="16px 0"
-              B_bottom="1px solid #ddd"
-            >
-              장난감
-            </Grid>
-            <Grid
-              _onClick={selectCat}
-              padding="16px 0"
-              B_bottom="1px solid #ddd"
-            >
-              의류
-            </Grid>
-            <Grid
-              _onClick={selectCat}
-              padding="16px 0"
-              B_bottom="1px solid #ddd"
-            >
-              기프티콘
-            </Grid>
+            {category.map((el, i) => {
+              return (
+                <Grid
+                  key={i}
+                  _onClick={selectCat}
+                  padding="16px 0"
+                  B_bottom="1px solid #ddd"
+                >
+                  {el}
+                </Grid>
+              );
+            })}
           </ReactModal>
         </Grid>
 

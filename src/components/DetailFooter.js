@@ -3,6 +3,8 @@ import { Grid, TextLabel, Button } from "../elements/Index";
 import { IoHeartOutline, IoHeart } from "react-icons/io5";
 
 const DetailFooter = (props) => {
+  const { price, postId } = props;
+
   const [state, setState] = React.useState(false);
 
   return (
@@ -27,10 +29,16 @@ const DetailFooter = (props) => {
           >
             {state ? <IoHeart /> : <IoHeartOutline />}
           </Grid>
-          <Grid padding="0 10px" is_flex flex_direction="column" gap="5px">
+          <Grid
+            padding="0 10px"
+            is_flex
+            flex_direction="column"
+            gap="5px"
+            align_items="flex-start"
+          >
             <Grid>
               <TextLabel F_size="18px" F_weight="bold">
-                45,000원
+                {price}원
               </TextLabel>
             </Grid>
             <Grid>

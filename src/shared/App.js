@@ -32,7 +32,7 @@ function App() {
 
           {/* 게시글 */}
           <Route path="/post" exact component={Post} />
-          <Route path="/edit" exact component={Edit} />
+          <Route path="/edit/:postid" exact component={Edit} />
           <Route path="/detail" exact component={Detail} />
 
           {/* 내정보 */}

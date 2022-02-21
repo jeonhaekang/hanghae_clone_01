@@ -21,32 +21,20 @@ const initialState = {
         address: '주소',
         profileImage: 'url',
     },
-    is_same: null,
 }
 
 // middlewares
 const signupDB =(id,nick,pwd,address) => {
     return function(dispatch, getState, {history}){
         apis.signup(id,nick,pwd,address)
-        .then(()=>{
+        .then((res)=>{
+            console.log(res.data)
             window.alert('회원가입 완료!');
             history.replace('/login');
         })
-        .catch(err=>{
-            console.log('err',err)
+        .catch(res=>{
+            window.alert('아이디 또는 닉네임이 중복됩니다.')
         })
-    }
-}
-
-const idcheckDB = (id) => {
-    return function(dispatch, getState, {history}){
-
-        apis.idcheck(id)
-        .then(res => {
-            console.log(res.data);
-            // dispatch(setSame())
-        })
-        .catch(err=>{console.log('err',err)})
     }
 }
 
@@ -85,7 +73,6 @@ export default handleActions({
 const userActions = {
     loginDB,
     signupDB,
-    idcheckDB
 }
 
 export { userActions }

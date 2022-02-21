@@ -1,6 +1,8 @@
 import React from "react";
 
 import { useDispatch, useSelector } from "react-redux";
+import { history } from "../redux/configStore";
+import apis from "../shared/apis";
 
 import { Grid, Upload, Button } from '../elements/Index';
 import { FiChevronDown } from 'react-icons/fi'
@@ -9,10 +11,11 @@ import Header from "../shared/Header";
 import ReactModal from "react-modal";
 
 const Post = (props) => {
-  const dispatch = useDispatch();
+  const files = useSelector(state => state.image.files)
   // category & modal
   const [open, setOpen] = React.useState(false);
   const [cat, setCat] = React.useState(null);
+
   // title, content, price
   const [title, setTit] = React.useState('');
   const [content, setCon] = React.useState('');
@@ -35,12 +38,30 @@ const Post = (props) => {
   }
 
   const posting = () => {
-    dispatch()
+    setDis(true)
+    let data = {
+      title: title,
+      content: content,
+      category: cat,
+      image: files,
+      price: price,
+    };
+    
+    console.log(data)
+
+    // apis.posting(data)
+    // .then(()=>{
+    //   history.replace('/main')
+    // })
+    // .catch(err=>{
+    //   console.log('err',err)
+    // })
+
   }
 
   return (
     <>
-    <Header title='post' _dis={_dis} _onCLick={posting} />
+    <Header title='post' _dis={_dis} _onClick={posting} />
     <Grid width='100%' padding='8px'>
 
       {/* 사진 업로드  */}
@@ -63,7 +84,7 @@ const Post = (props) => {
 
       {/* 카테고리 modal 이용 단 골라진 카테고리가 modal 적용 되지는 않음 */}
       <Grid padding='16px 4px' width='100%' B_bottom='1px solid rgba(0,0,0,0.07)' >
-        <Grid is_flex justify_content='spcae-between' _onClick={()=>{setOpen(true)}}>
+        <Grid is_flex justify_content='space-between' _onClick={()=>{setOpen(true)}}>
             {cat ? cat : '카테고리'}
             <FiChevronDown />
         </Grid>

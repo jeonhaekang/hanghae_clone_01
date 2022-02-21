@@ -81,9 +81,9 @@ const Post = (props) => {
           <input
             type="text"
             placeholder="제목"
+            onKeyUp={least}
             onChange={(e) => {
               setTit(e.target.value);
-              least();
             }}
             style={{
               border: "none",
@@ -208,9 +208,9 @@ const Post = (props) => {
         <Grid padding="16px 4px" width="100%">
           <textarea
             rows={10}
+            onKeyUp={least}
             onChange={(e) => {
               setCon(e.target.value);
-              least();
             }}
             style={{
               width: "100%",

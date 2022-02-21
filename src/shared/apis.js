@@ -35,6 +35,9 @@ const apis = {
   
   // 로그인 체크
   check: () => instance.get('/user/'),
+
+  // 게시글 작성
+  posting: (data) => instance.post('/post',data),
 };
 
 export default apis;

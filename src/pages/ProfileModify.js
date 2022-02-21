@@ -5,7 +5,13 @@ import styled from "styled-components";
 import profile from "../images/profile.jpeg";
 import ReactModal from "react-modal";
 
+import { useDispatch, useSelector } from "react-redux";
+import { imgActions } from "../redux/modules/Image";
+
 const ProfileModify = (props) => {
+  const dispatch = useDispatch();
+  const pro = useSelector(state=>state.image.pro);
+  const fileInput = React.useRef();
   const addrList = [
     "서울특별시",
     "울산광역시",
@@ -28,14 +34,28 @@ const ProfileModify = (props) => {
   const [address, setAdd] = React.useState("");
   const [open, setOpen] = React.useState(false);
 
+  // 주소 선택
   const selAdd = (e) => {
     setOpen(false);
     setAdd(e.target.innerHTML);
   };
 
+  // 닉네임 작성
   const editNickname = (e) => {
     setNickname(e.target.value);
   };
+
+  // 사진변경
+  const selpic = (e) => {
+    const reader = new FileReader();
+        let file = fileInput.current.files[0];
+
+        reader.readAsDataURL(file);
+
+        reader.onloadend = () => {
+            dispatch(imgActions.setPro(reader.result,file));
+        }
+  }
 
   React.useEffect(() => {
     if (nickname) {
@@ -50,7 +70,9 @@ const ProfileModify = (props) => {
       <Header title="프로필 수정" />
 
       <Grid is_flex flex_direction="column" gap="20px" padding="20px">
-        <ProfileImage src={profile} />
+        {/* <ProfileImage src={profile} /> */}
+        <ProfileLabel htmlFor="prof" src={ pro.length === 0 ? profile : pro[0] } />
+        <Editimg id='prof' ref={fileInput} type='file' onChange={()=>{}} />
         <Input onChange={(e) => editNickname(e)} />
         <Input value={address} readOnly onClick={() => setOpen(true)} />
       </Grid>
@@ -91,6 +113,19 @@ const ProfileModify = (props) => {
 
 const ProfileImage = styled.img`
   width: 120px;
+`;
+
+const ProfileLabel = styled.label`
+  width: 120px;
+  height: 120px;
+  border: 1px solid rgba(0 0 0 0.7);
+  border-radius: 120px;
+  background-image: url(${props => props.src});
+  background-size: cover;
+`
+
+const Editimg = styled.input`
+  display: none;
 `;
 
 const EditBtn = styled.button`

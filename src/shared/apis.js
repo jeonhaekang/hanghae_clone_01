@@ -28,7 +28,7 @@ const apis = {
   }),
 
   // 아이디 중복 체크
-  idcheck: (id) => instance.post('/user.idcheck',{username: id}),
+  idcheck: (id) => instance.post('/user/idcheck',{username: id}),
   
   // 로그인
   login: (id, pwd) => instance.post('/user/login',{username: id, password: pwd}),

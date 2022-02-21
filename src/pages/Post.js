@@ -43,7 +43,7 @@ const Post = (props) => {
     <Header title='post' _dis={_dis} _onCLick={posting} />
     <Grid width='100%' padding='8px'>
 
-      {/* 사진 업로드 */}
+      {/* 사진 업로드  */}
       <Grid padding='10px 4px' width='100%' B_bottom='1px solid rgba(0,0,0,0.07)' >
         <Upload />
       </Grid>

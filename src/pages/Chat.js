@@ -5,30 +5,49 @@ import styled from "styled-components";
 import { IoMdSend } from "react-icons/io";
 import profile from "../images/profile.jpeg";
 
-const Chat = (props) => {
+import SockJS from "sockjs-client";
+import Stomp from "stompjs";
+
+const Chat = () => {
+  const [stomp, setStomp] = React.useState();
+
+  const [text, setText] = React.useState("");
+
+  const message = (e) => {
+    console.log(text);
+  };
   return (
     <React.Fragment>
       <Header title="상대방닉네임" />
       <Grid padding="15px" is_flex gap="10px">
-        {/* 상대방 채팅 */}
-        <Grid is_flex gap="10px" width="100%">
-          <ProfileOuter>
-            <Profile src={profile} />
-          </ProfileOuter>
-          <ChatText color="rgb(240, 241, 246)">
-            <TextLabel>채팅내용 입니다채팅내용 입니다채팅내용</TextLabel>
-          </ChatText>
-        </Grid>
-
-        {/* 나의 채팅 */}
-        <Grid is_flex width="100%" justify_content="flex-end">
-          <ChatText color="#ff7e36">
-            <TextLabel F_color="white">
-              채팅내용 입니다채팅내용 입니다채팅내용
-            </TextLabel>
-          </ChatText>
-        </Grid>
+        {/* {chat.map((el, i) => {
+          if (el.name === "me") {
+            return (
+              //나의 채팅
+              <Grid key={i} is_flex width="100%" justify_content="flex-end">
+                <ChatText color="#ff7e36">
+                  <TextLabel F_color="white">
+                    채팅내용 입니다채팅내용 입니다채팅내용
+                  </TextLabel>
+                </ChatText>
+              </Grid>
+            );
+          } else {
+            return (
+              //상대방 채팅
+              <Grid key={i} is_flex gap="10px" width="100%">
+                <ProfileOuter>
+                  <Profile src={profile} />
+                </ProfileOuter>
+                <ChatText color="rgb(240, 241, 246)">
+                  <TextLabel>채팅내용 입니다채팅내용 입니다채팅내용</TextLabel>
+                </ChatText>
+              </Grid>
+            );
+          }
+        })} */}
       </Grid>
+
       <Grid
         position="fixed"
         bottom="0"
@@ -37,8 +56,15 @@ const Chat = (props) => {
         BG_c="rgb(240,241,246)"
         is_flex
       >
+        {/* <Grid width="100%">
+          <Input name="name" placeholder="닉네임을 입력하세요." />
+        </Grid> */}
         <Grid width="90%">
-          <Input placeholder="메시지를 입력하세요." />
+          <Input
+            //onChange={(e) => setText(e.target.value)}
+            name="message"
+            placeholder="메시지를 입력하세요."
+          />
         </Grid>
         <Grid width="10%" color="rgba(0,0,0,0.2)">
           <SendButton>

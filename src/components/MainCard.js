@@ -8,13 +8,16 @@ import ReactModal from "react-modal";
 import "../shared/App.css";
 
 const MainCard = (props) => {
-  const { page } = props;
-  const [state, setState] = React.useState(false);
+  console.log(props);
+  const { page, userInfo, postId, title, price, likeCnt, state, image } = props;
+
+  const [ModalState, setModalState] = React.useState(false);
   const [likeState, setLikeState] = React.useState(false);
 
   const likeChange = () => {
     setLikeState(!likeState);
   };
+  console.log(image[0]);
 
   return (
     <React.Fragment>
@@ -27,7 +30,7 @@ const MainCard = (props) => {
         position="relative"
       >
         <Grid width="30%">
-          <AspectInner src={test} />
+          <AspectInner src={image[0]} />
         </Grid>
         <Grid
           is_flex
@@ -37,26 +40,28 @@ const MainCard = (props) => {
           width="60%"
         >
           <TextLabel F_size="17px" F_weight="bold">
-            삼성 노트북 팝니다!!
+            {title}
           </TextLabel>
-          <TextLabel F_color="#4D5159">노원구 상계동</TextLabel>
+          <TextLabel F_color="#4D5159">{userInfo.address}</TextLabel>
           <Grid is_flex gap="10px">
-            <Grid
-              width="auto"
-              BG_c="rgba(0,0,0,0.6)"
-              padding="1px 10px 3px 10px"
-              B_radius="3px"
-            >
-              <TextLabel F_weight="bold" F_color="white" F_size="12px">
-                거래완료
-              </TextLabel>
-            </Grid>
-            <TextLabel F_weight="bold">12,000원</TextLabel>
+            {state && (
+              <Grid
+                width="auto"
+                BG_c="rgba(0,0,0,0.6)"
+                padding="1px 10px 3px 10px"
+                B_radius="3px"
+              >
+                <TextLabel F_weight="bold" F_color="white" F_size="12px">
+                  거래완료
+                </TextLabel>
+              </Grid>
+            )}
+            <TextLabel F_weight="bold">{price}원</TextLabel>
           </Grid>
         </Grid>
         <Grid position="absolute" right="10px" bottom="10px" is_flex gap="5px">
           <IoHeartOutline />
-          <TextLabel>0</TextLabel>
+          <TextLabel>{likeCnt}</TextLabel>
         </Grid>
 
         <Grid position="absolute" top="15px" right="10px">
@@ -73,7 +78,7 @@ const MainCard = (props) => {
           ) : (
             <Grid
               _onClick={() => {
-                setState(true);
+                setModalState(true);
               }}
             >
               <IoEllipsisVertical />
@@ -84,10 +89,10 @@ const MainCard = (props) => {
 
       {/* 수정 모달 & 좋아요 기능 */}
       <ReactModal
-        state={state}
-        isOpen={state}
+        state={ModalState}
+        isOpen={ModalState}
         ariaHideApp={false}
-        onRequestClose={() => setState(false)}
+        onRequestClose={() => setModalState(false)}
         closeTimeoutMS={200}
         style={{
           overlay: {
@@ -127,6 +132,24 @@ const MainCard = (props) => {
 
 MainCard.defaultProps = {
   page: null,
+  userInfo: {
+    userid: 0,
+    nickname: "",
+    rate: 36.5,
+    address: "",
+    profileImage: "",
+  },
+  postId: 0,
+  title: "",
+  content: "",
+  category: "",
+  createdAt: "",
+  image: [],
+  price: 0,
+  viewCnt: 0,
+  likeCnt: 0,
+  state: true,
+  consumer: "",
 };
 
 const AspectInner = styled.div`

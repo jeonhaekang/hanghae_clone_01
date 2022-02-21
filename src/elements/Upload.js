@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { imgActions } from "../redux/modules/Image";
 
 import styled from "styled-components";
-import { Grid } from './Index'
+import { Grid, Text } from './Index'
 import { HiUpload } from 'react-icons/hi';
 
 const Upload = (props) => {

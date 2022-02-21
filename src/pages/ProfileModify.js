@@ -126,10 +126,11 @@ const Input = styled.input`
   border: 1px solid rgba(0, 0, 0, 0.25);
   box-sizing: border-box;
   text-align: center;
-  outline: none;
+
   &:focus {
     border: 1px solid rgba(0, 0, 0, 0.7);
     caret-color: #ff7e36;
+    outline: none;
   }
 `;
 

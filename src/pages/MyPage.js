@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Grid, TextLabel, Button } from "../elements/Index";
+import { Grid, TextLabel } from "../elements/Index";
 import profile from "../images/profile.jpeg";
 import pay from "../images/pay.jpeg";
 import sellIcon from "../images/sellIcon.jpeg";
@@ -24,7 +24,9 @@ const MyPage = (props) => {
         }}
       >
         <Grid is_flex gap="20px" postion="relative">
-          <Profile src={profile} />
+          <ProfileOuter>
+            <Profile src={profile} />
+          </ProfileOuter>
           <Grid
             is_flex
             flex_direction="column"
@@ -111,8 +113,18 @@ const MyPage = (props) => {
 
 MyPage.defaultProps = {};
 
-const Profile = styled.img`
+const ProfileOuter = styled.div`
   width: 80px;
+  height: 80px;
+`;
+
+const Profile = styled.div`
+  position: relative;
+  padding-top: 100%;
+  overflow: hidden;
+  background-image: url("${(props) => props.src}");
+  background-size: cover;
+  border-radius: 40px;
 `;
 
 const PayImage = styled.img`

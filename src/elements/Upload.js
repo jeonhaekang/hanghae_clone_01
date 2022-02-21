@@ -46,7 +46,7 @@ const Upload = (props) => {
 
 const Lab = styled.label`
     display: block;
-    text-align center;
+    text-align: center;
     line-height: 50px;
     font-size: 18px;
     width: 50px;

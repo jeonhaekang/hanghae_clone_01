@@ -15,6 +15,7 @@ import {
   MyPageSell,
   MyPageLike,
   Review,
+  Chat,
 } from "../pages/Index";
 import { Route } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
@@ -34,6 +35,7 @@ function App() {
           <Route path="/post" exact component={Post} />
           <Route path="/edit" exact component={Edit} />
           <Route path="/detail" exact component={Detail} />
+          <Route path="/chat" exact component={Chat} />
 
           {/* 내정보 */}
           <Route path="/mypage" exact component={MyPage} />

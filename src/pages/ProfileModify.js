@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../shared/Header";
-import { Grid, TextLabel, Button } from "../elements/Index";
+import { Grid } from "../elements/Index";
 import styled from "styled-components";
 import profile from "../images/profile.jpeg";
 import ReactModal from "react-modal";
@@ -50,7 +50,9 @@ const ProfileModify = (props) => {
       <Header title="프로필 수정" />
 
       <Grid is_flex flex_direction="column" gap="20px" padding="20px">
-        <ProfileImage src={profile} />
+        <ProfileOuter>
+          <Profile src={profile} />
+        </ProfileOuter>
         <Input onChange={(e) => editNickname(e)} />
         <Input value={address} readOnly onClick={() => setOpen(true)} />
       </Grid>
@@ -89,8 +91,18 @@ const ProfileModify = (props) => {
   );
 };
 
-const ProfileImage = styled.img`
+const ProfileOuter = styled.div`
   width: 120px;
+  height: 120px;
+`;
+
+const Profile = styled.div`
+  position: relative;
+  padding-top: 100%;
+  overflow: hidden;
+  background-image: url("${(props) => props.src}");
+  background-size: cover;
+  border-radius: 60px;
 `;
 
 const EditBtn = styled.button`

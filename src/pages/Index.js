@@ -12,6 +12,7 @@ import MyPageBuy from "./MyPageBuy";
 import MyPageSell from "./MyPageSell";
 import MyPageLike from "./MyPageLike";
 import Review from "./Review";
+import Chat from "./Chat";
 
 export {
   Detail,
@@ -28,4 +29,5 @@ export {
   MyPageSell,
   MyPageLike,
   Review,
+  Chat,
 };

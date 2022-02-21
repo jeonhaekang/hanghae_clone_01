@@ -12,7 +12,7 @@ import veryGoodColor from "../images/review/verygoodcolor.png";
 
 const Review = () => {
   const [state, setState] = React.useState(null);
-  console.log(state);
+  
   return (
     <React.Fragment>
       <Header />

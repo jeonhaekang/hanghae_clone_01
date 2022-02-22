@@ -6,9 +6,8 @@ import styled from "styled-components";
 import { Grid } from "../elements/Index";
 
 const DetailSlider = (props) => {
-  //const { image } = props;
-  const image = [test];
-
+  let { image } = props;
+  image = [image];
   const style = {
     showArrows: false,
     showThumbs: false,

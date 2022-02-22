@@ -8,6 +8,7 @@ import { Grid, Upload } from "../elements/Index";
 import { FiChevronDown } from "react-icons/fi";
 import Header from "../shared/Header";
 import { postActions } from "../redux/modules/Post";
+import { imgActions } from "../redux/modules/Image";
 import ReactModal from "react-modal";
 
 const Post = (props) => {
@@ -35,10 +36,12 @@ const Post = (props) => {
   const [_dis, setDis] = React.useState(true);
 
   React.useEffect(() => {
+    dispatch(imgActions.initPre());
     if (!post) {
       dispatch(postActions.getOnePostDB(postId));
       return;
     }
+    dispatch(imgActions.setPre(post.image,post.image));
     setTit(post.title);
     setCon(post.content);
     setPri(post.price);

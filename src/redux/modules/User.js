@@ -83,11 +83,7 @@ export default handleActions(
   {
     [SET_USER]: (state, action) =>
       produce(state, (draft) => {
-        console.log("login");
-      }),
-    [SET_SMAE]: (state, action) =>
-      produce(state, (draft) => {
-        draft.is_same = action.payload.same;
+        draft.userInfo = {...action.payload.userInfo};
       }),
   },
   initialState

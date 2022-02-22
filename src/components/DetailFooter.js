@@ -2,10 +2,29 @@ import React from "react";
 import { Grid, TextLabel, Button } from "../elements/Index";
 import { IoHeartOutline, IoHeart } from "react-icons/io5";
 
+import apis from "../shared/apis";
+
 const DetailFooter = (props) => {
   const { price, postId } = props;
 
   const [state, setState] = React.useState(false);
+
+  React.useEffect(()=>{
+
+  },[state])
+
+  const likeBtn = () =>{
+    apis.pushLike(postId)
+    .then(res => {
+      let data = res.data;
+      console.log(data)
+      setState(!state);
+    })
+    .catch(err => {
+      window.alert('좋아요 실패 나중에 다시 시도해주세요.')
+      console.log('err from DetailFooter : ',err)
+    })
+  }
 
   return (
     <React.Fragment>
@@ -24,7 +43,7 @@ const DetailFooter = (props) => {
             font_size="25px"
             padding="0 10px"
             B_right="1px solid rgba(0,0,0,0.1)"
-            _onClick={() => setState(!state)}
+            _onClick={likeBtn}
             color={state ? "red" : ""}
           >
             {state ? <IoHeart /> : <IoHeartOutline />}

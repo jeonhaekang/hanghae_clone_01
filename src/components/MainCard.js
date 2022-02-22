@@ -13,8 +13,8 @@ import { history } from "../redux/configStore";
 const MainCard = (props) => {
   const dispatch = useDispatch();
 
-  const { page, user, postId, title, price, likeCnt, state } = props;
-  const image = [test];
+  const { image ,page, user, postId, title, price, likeCnt, state } = props;
+  
 
   const [ModalState, setModalState] = React.useState(false);
   const [likeState, setLikeState] = React.useState(false);
@@ -45,7 +45,7 @@ const MainCard = (props) => {
         position="relative"
       >
         <Grid width="30%" _onClick={() => history.push("/detail/" + postId)}>
-          <AspectInner src={image[0]} />
+          <AspectInner src={image} />
         </Grid>
         <Grid
           is_flex

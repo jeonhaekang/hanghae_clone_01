@@ -10,8 +10,13 @@ import Header from "../shared/Header";
 import { IoChevronForwardOutline, IoPencil } from "react-icons/io5";
 import { history } from "../redux/configStore";
 import Footer from "../shared/Footer";
+import { useDispatch, useSelector } from "react-redux";
 
 const MyPage = (props) => {
+  const user = useSelector((state) => state.user.userInfo);
+
+  console.log(user);
+
   return (
     <Grid>
       <Header title="나의 당근" />
@@ -25,7 +30,13 @@ const MyPage = (props) => {
       >
         <Grid is_flex gap="20px" postion="relative">
           <ProfileOuter>
-            <Profile src={profile} />
+            <Profile
+              src={
+                user.profileImage === "default.img"
+                  ? profile
+                  : user.profileImage
+              }
+            />
           </ProfileOuter>
           <Grid
             is_flex
@@ -34,10 +45,10 @@ const MyPage = (props) => {
             gap="10px"
           >
             <TextLabel F_size="17px" F_weight="bold">
-              godgooddog
+              {user.nickname}
             </TextLabel>
             <TextLabel F_color="#4D5159" F_weight="500">
-              노원구 상계동
+              {user.address}
             </TextLabel>
           </Grid>
         </Grid>

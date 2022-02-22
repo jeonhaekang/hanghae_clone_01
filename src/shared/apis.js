@@ -38,9 +38,6 @@ const apis = {
   // 로그인 체크
   check: () => instance.get("/user/"),
 
-  // 게시글 작성
-  posting: (data) => instance.post("/post", data),
-
   // 게시글 수정
   modifyPost: (postId, data) => instance.put("/post/" + postId, data),
 

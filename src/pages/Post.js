@@ -19,7 +19,6 @@ const Post = (props) => {
     dispatch(imgActions.initPre());
   }, []);
 
-  const files = useSelector((state) => state.image.files);
   // category & modal
   const [open, setOpen] = React.useState(false);
   const [cat, setCat] = React.useState(null);
@@ -52,7 +51,6 @@ const Post = (props) => {
       title: title,
       content: content,
       category: cat,
-      //image: files,
       price: price,
     };
 

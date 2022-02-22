@@ -4,6 +4,7 @@ import { deprecationHandler } from "moment";
 import moment from "moment";
 import apis from "../../shared/apis";
 import test from "../../images/test.jpeg";
+import formApis from "../../shared/formApis";
 
 const LOAD_POST = "LOAD_POST";
 const UPDATE_POST = "UPDATE_POST";
@@ -76,9 +77,19 @@ const getOnePostDB = (postId) => {
 
 const addPostDB = (data) => {
   return function (dispatch, getState, { history }) {
-    console.log(data);
-    apis
-      .posting(data)
+    const formdata = new FormData();
+    let file = getState().image.files[0];
+
+    formdata.append("image", file);
+    formdata.append(
+      "post",
+      new Blob([JSON.stringify(data)], { type: "application/json" })
+    );
+
+    console.log([JSON.stringify(data)]);
+
+    formApis
+      .posting(formdata)
       .then((res) => {
         console.log(res);
         const postId = initialState.list.length; //임시아이디

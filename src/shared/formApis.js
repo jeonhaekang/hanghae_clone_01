@@ -7,6 +7,7 @@ const instance = axios.create({
   baseURL: "http://13.125.53.14:8080",
   headers: {
     "Content-Type": "multipart/form-data",
+    accept: 'application/josn,',
   },
 });
 

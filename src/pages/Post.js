@@ -21,7 +21,7 @@ const Post = (props) => {
 
   // category & modal
   const [open, setOpen] = React.useState(false);
-  const [cat, setCat] = React.useState(null);
+  const [cat, setCat] = React.useState('');
 
   // title, content, price
   const [title, setTit] = React.useState("");
@@ -53,6 +53,8 @@ const Post = (props) => {
       category: cat,
       price: price,
     };
+
+    console.log(data);
 
     dispatch(postActions.addPostDB(data));
     history.push("/main");

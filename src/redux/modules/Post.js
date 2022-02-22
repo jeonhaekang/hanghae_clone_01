@@ -79,8 +79,8 @@ const addPostDB = (data) => {
   return function (dispatch, getState, { history }) {
     const formdata = new FormData();
     let file = getState().image.files[0];
-
-    formdata.append("image", file);
+    console.log(data);
+    formdata.append("file", file);
     formdata.append(
       "post",
       new Blob([JSON.stringify(data)], { type: "application/json" })

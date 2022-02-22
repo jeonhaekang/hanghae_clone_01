@@ -8,6 +8,7 @@ const DEL_PRE = 'DEL_PRE';
 const EDIT_PRE = 'EDIT_PRE';
 
 const SET_PRO = 'SET_PRO';
+const DEL_PRO = 'DEL_PRO';
 const INIT_PRO = 'INIT_PRO';
 
 // actioncreators
@@ -17,6 +18,7 @@ const delPre = createAction(DEL_PRE,(index)=>({index}));
 const editPre = createAction(EDIT_PRE,(pres)=>({pres}));
 
 const setPro = createAction(SET_PRO,(pro,file)=>({pro,file}));
+const delPro = createAction(DEL_PRO,()=>({}));
 const initPro = createAction(INIT_PRO,(file)=>({file}));
 
 // initialState
@@ -51,6 +53,9 @@ export default handleActions({
     [SET_PRO]:(state,action)=>produce(state,(draft)=>{
         draft.pro = [action.payload.pro,action.payload.file];
     }),
+    [DEL_PRO]:(state,action)=>produce(state,(draft)=>{
+        draft.pro = [];
+    }),
 },initialState)
 
 const imgActions = {
@@ -60,6 +65,7 @@ const imgActions = {
     editPre,
     setPro,
     initPro,
+    delPro,
 }
 
 export { imgActions }

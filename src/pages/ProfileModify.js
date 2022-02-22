@@ -71,8 +71,12 @@ const ProfileModify = (props) => {
 
       <Grid is_flex flex_direction="column" gap="20px" padding="20px">
         {/* <ProfileImage src={profile} /> */}
-        <ProfileLabel htmlFor="prof" src={ pro.length === 0 ? profile : pro[0] } />
-        <Editimg id='prof' ref={fileInput} type='file' onChange={()=>{}} />
+        <Grid width='auto' position='relative' >
+          <ProfileLabel htmlFor="prof" src={ pro.length === 0 ? profile : pro[0] } />        
+          {pro.length !== 0 &&
+          <Delpro onClick={()=>{dispatch(imgActions.delPro())}} >x</Delpro>}
+          <Editimg id='prof' ref={fileInput} type='file' onChange={selpic} />
+        </Grid>
         <Input onChange={(e) => editNickname(e)} />
         <Input value={address} readOnly onClick={() => setOpen(true)} />
       </Grid>
@@ -116,6 +120,8 @@ const ProfileImage = styled.img`
 `;
 
 const ProfileLabel = styled.label`
+  display: block;
+  postion: relative;
   width: 120px;
   height: 120px;
   border: 1px solid rgba(0 0 0 0.7);
@@ -123,6 +129,20 @@ const ProfileLabel = styled.label`
   background-image: url(${props => props.src});
   background-size: cover;
 `
+
+const Delpro = styled.div`
+  color: #FFF;
+  font-size: 24px;
+  text-align: center;
+  line-height: 20px;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: #000;
+  position: absolute;
+  right: 3px;
+  bottom: 2px;
+`;
 
 const Editimg = styled.input`
   display: none;

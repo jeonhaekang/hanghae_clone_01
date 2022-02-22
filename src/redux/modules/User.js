@@ -93,12 +93,9 @@ const userInfoModifyDB = (image, data) => {
     formApis
       .userInfoModify(formdata)
       .then((res) => {
-        const user = getState().user.userInfo;
-
         const reader = new FileReader();
         reader.readAsDataURL(image);
         reader.onloadend = () => {
-          console.log({ ...data, profileImage: reader.result });
           dispatch(setUser({ ...data, profileImage: reader.result }));
         };
         console.log(res);

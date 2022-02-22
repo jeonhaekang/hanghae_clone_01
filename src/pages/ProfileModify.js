@@ -45,10 +45,6 @@ const ProfileModify = (props) => {
     }
   }, [user]);
 
-  console.log(file);
-
-  console.log(user);
-
   const selAdd = (e) => {
     setOpen(false);
     setAdd(e.target.innerHTML);
@@ -70,6 +66,10 @@ const ProfileModify = (props) => {
   };
 
   const modifyButton = () => {
+    if (nickname.length < 6 || nickname.length > 10) {
+      window.alert("닉네임은 최소 6자 최대 10자 입니다.");
+      return;
+    }
     let Image = imageRef.current.files[0];
     const data = {
       nickname: nickname,

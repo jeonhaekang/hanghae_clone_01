@@ -31,7 +31,6 @@ const MainCard = (props) => {
 
   const postStateSet = () => {
     dispatch(postActions.postStateSetDB(postId, state));
-    setModalState(false);
   };
 
   return (

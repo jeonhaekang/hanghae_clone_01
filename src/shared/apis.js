@@ -38,9 +38,6 @@ const apis = {
   // 로그인 체크
   check: () => instance.get("/user/"),
 
-  // 게시글 수정
-  modifyPost: (postId, data) => instance.put("/post/" + postId, data),
-
   // 게시글 불러오기
   posts: () => instance.get("/post"),
 
@@ -49,6 +46,12 @@ const apis = {
 
   // 게시글 한개 불러오기
   getOnePost: (postId) => instance.get("/post/" + postId),
+
+  // 좋아요 유저목록 가져오기 
+  getLikeUser: (postId) => instance.get("/like/list/" + postId),
+
+  // 좋아요 등록/해제
+  pushLike : (postId) => instance.post("/like/" + postId),
 };
 
 export default apis;

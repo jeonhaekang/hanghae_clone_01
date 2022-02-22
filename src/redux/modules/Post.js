@@ -79,7 +79,9 @@ const addPostDB = (data) => {
   return function (dispatch, getState, { history }) {
     const formdata = new FormData();
     let file = getState().image.files[0];
-    console.log(data);
+    let user_info = getState().user.userInfo;
+    console.log(user_info)
+    
     formdata.append("file", file);
     formdata.append(
       "post",
@@ -94,17 +96,19 @@ const addPostDB = (data) => {
         console.log(res);
         const postId = initialState.list.length; //임시아이디
         const date = moment().format("YYYY-MM-DD");
-        //const image = getState().image.pres;
 
-        dispatch(
-          addPost({
-            ...postInitialState,
-            ...data,
-            createdAt: date,
-            //image: image,
-            postId: postId,
-          })
-        );
+        dispatch(loadPostDB());
+        history.replace('/main');
+
+        // dispatch(
+        //   addPost({
+        //     ...postInitialState,
+        //     ...data,
+        //     createdAt: date,
+        //     //image: image,
+        //     postId: postId,
+        //   })
+        // );
       })
       .catch((err) => {
         console.log(err.response);
@@ -114,10 +118,21 @@ const addPostDB = (data) => {
 
 const modifyPostDB = (postId, data) => {
   return function (dispatch, getState, { history }) {
-    apis
-      .modifyPost(postId, data)
+    const formdata = new FormData();
+    let file = getState().image.files[0];
+    let img = getState().image.pres[0];
+
+    formdata.append("file", file);
+    formdata.append(
+      "post",
+      new Blob([JSON.stringify(data)], { type: "application/json" })
+    );
+
+    formApis
+      .modifyPost(postId, formdata)
       .then((res) => {
         console.log(res);
+        data = {...data, image: img};
         dispatch(updatePost(postId, data));
       })
       .catch((err) => {
@@ -159,9 +174,8 @@ export default handleActions(
       produce(state, (draft) => {
         const postId = action.payload.postId;
         draft.list = draft.list.map((el) => {
-          console.log(el.postId, postId);
           if (el.postId === parseInt(postId)) {
-            return { ...el, ...action.payload.data };
+            return { ...el, ...action.payload.data};
           }
           return el;
         });

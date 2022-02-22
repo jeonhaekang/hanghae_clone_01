@@ -13,7 +13,7 @@ const INIT_PRO = "INIT_PRO";
 
 // actioncreators
 const setPre = createAction(SET_PRE, (pre, data) => ({ pre, data }));
-const initPre = createAction(INIT_PRE, () => ({}));
+const initPre = createAction(INIT_PRE, (url) => ({url}));
 const delPre = createAction(DEL_PRE, (index) => ({ index }));
 const editPre = createAction(EDIT_PRE, (pres) => ({ pres }));
 
@@ -40,6 +40,7 @@ export default handleActions(
       produce(state, (draft) => {
         draft.pres = [...draft.pres, action.payload.pre];
         draft.files = [...draft.files, action.payload.data];
+        console.log(draft.pres,draft.files)
       }),
     [INIT_PRE]: (state, action) =>
       produce(state, (draft) => {
@@ -51,7 +52,11 @@ export default handleActions(
         draft.pres = draft.pres.filter((p, i) => i !== action.payload.index);
         draft.files = draft.files.filter((p, i) => i !== action.payload.index);
       }),
-    [EDIT_PRE]: (state, action) => produce(state, (draft) => {}),
+    [EDIT_PRE]: (state, action) => produce(state, (draft) => {
+      console.log(action.payload.url)
+      draft.pres = [...draft.pres,action.payload.url];
+      draft.files = [...draft.files,action.payload.url];
+    }),
     // 프로필 선택용
     [SET_PRO]: (state, action) =>
       produce(state, (draft) => {

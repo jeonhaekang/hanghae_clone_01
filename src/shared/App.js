@@ -18,9 +18,18 @@ import {
 } from "../pages/Index";
 import { Route } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
+import { useSelector, useDispatch } from "react-redux";
+import { userActions } from "../redux/modules/User";
 import { history } from "../redux/configStore";
 
 function App() {
+  const dispatch = useDispatch();
+  React.useEffect(()=>{
+    dispatch(userActions.logincheckDB());
+  },[])
+  const user = useSelector(state => state.user.userInfo);
+  console.log(user)
+
   return (
     <React.Fragment>
       <Container>

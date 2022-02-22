@@ -25,6 +25,11 @@ const Signup = (props) => {
 
   // 제출용 버튼 함수
   const submit = () =>{
+    let reg = /^[a-zA-Z0-9]{6,12}$/
+    if(!reg.test(pwd)){
+      window.alert('비밀번호에 특수문자는 넣으실 수 없습니다.')
+      return;
+    }
     // 공란 체크
     if(id.length === 0 || nick.length === 0 || pwd.length === 0 || !address){
       window.alert('공란이 있습니다.');

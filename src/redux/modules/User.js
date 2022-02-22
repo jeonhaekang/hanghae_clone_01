@@ -40,53 +40,6 @@ const signupDB = (id, nick, pwd, address) => {
   };
 };
 
-
-const loginDB =(id,pwd) => {
-    return function(dispatch, getState, {history}){
-        apis.login(id,pwd)
-        .then(res =>{
-            setCookie(res.headers.authorization, 3);
-
-            apis.check()
-            .then(res=>{
-                dispatch(setUser(res.data))
-                history.replace('/main')
-            })
-            .catch(err=>{
-                console.log('err',err)
-            })
-
-        })
-        .catch(err => {console.log('err',err.response)})
-    }
-}
-
-const logincheckDB = () => {
-    return function (dispatch, getState, {history}){
-        apis.check()
-        .then(res => {
-            dispatch(setUser(res.data));
-        })
-        .catch(err => {
-            window.alert('다시 로그인 해주세요!');
-            history.replace('/login');
-            console.log('error from check', err)
-        })
-    }
-}
-
-// reducer
-export default handleActions({
-    [SET_USER]:(state,action)=>produce(state,(draft)=>{
-        draft.userInfo = {...action.payload.userInfo};
-    }),
-},initialState)
-
-const userActions = {
-    loginDB,
-    signupDB,
-    logincheckDB,
-}
 const loginDB = (id, pwd) => {
   return function (dispatch, getState, { history }) {
     apis
@@ -97,16 +50,30 @@ const loginDB = (id, pwd) => {
         apis
           .check()
           .then((res) => {
-            console.log(res);
-            // dispatch(setUser(res.data))
+            dispatch(setUser(res.data));
             history.replace("/main");
           })
           .catch((err) => {
-            console.log("err", err.response);
+            console.log("err", err);
           });
       })
       .catch((err) => {
         console.log("err", err.response);
+      });
+  };
+};
+
+const logincheckDB = () => {
+  return function (dispatch, getState, { history }) {
+    apis
+      .check()
+      .then((res) => {
+        dispatch(setUser(res.data));
+      })
+      .catch((err) => {
+        window.alert("다시 로그인 해주세요!");
+        history.replace("/login");
+        console.log("error from check", err);
       });
   };
 };
@@ -129,7 +96,7 @@ export default handleActions(
 const userActions = {
   loginDB,
   signupDB,
+  logincheckDB,
 };
-
 
 export { userActions };

@@ -49,6 +49,14 @@ const apis = {
 
   // 게시글 한개 불러오기
   getOnePost: (postId) => instance.get("/post/" + postId),
+
+  // 좋아요 유저목록 가져오기
+  getLikeUser: (postId) => instance.get("/like/list/" + postId),
+
+  // 판매 상태 변경
+  setState: (postId, consumer) =>
+    instance.post("/post/state/" + postId, consumer),
+
 };
 
 export default apis;

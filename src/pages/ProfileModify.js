@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useDebugValue } from "react";
 import Header from "../shared/Header";
 import { Grid, TextLabel, Button } from "../elements/Index";
 import styled from "styled-components";
 import profile from "../images/profile.jpeg";
 import ReactModal from "react-modal";
+import { useDispatch, useSelector } from "react-redux";
+import { imgActions } from "../redux/modules/Image";
+import { userActions } from "../redux/modules/User";
 
 const ProfileModify = (props) => {
   const addrList = [
@@ -22,11 +25,29 @@ const ProfileModify = (props) => {
     "창원시",
   ];
   // 버튼 활성화 여부
+  const dispatch = useDispatch();
   const [state, setState] = React.useState(false);
 
   const [nickname, setNickname] = React.useState("");
   const [address, setAdd] = React.useState("");
   const [open, setOpen] = React.useState(false);
+  const [file, setFile] = React.useState(null);
+
+  const user = useSelector((state) => state.user.userInfo);
+
+  const imageRef = React.useRef();
+
+  React.useEffect(() => {
+    if (user) {
+      setFile(user.profileImage);
+      setNickname(user.nickname);
+      setAdd(user.address);
+    }
+  }, [user]);
+
+  console.log(file);
+
+  console.log(user);
 
   const selAdd = (e) => {
     setOpen(false);
@@ -35,6 +56,26 @@ const ProfileModify = (props) => {
 
   const editNickname = (e) => {
     setNickname(e.target.value);
+  };
+
+  const setImage = () => {
+    const reader = new FileReader();
+    let Image = imageRef.current.files[0];
+
+    reader.readAsDataURL(Image);
+
+    reader.onloadend = () => {
+      setFile(reader.result);
+    };
+  };
+
+  const modifyButton = () => {
+    let Image = imageRef.current.files[0];
+    const data = {
+      nickname: nickname,
+      address: address,
+    };
+    dispatch(userActions.userInfoModifyDB(Image, data));
   };
 
   React.useEffect(() => {
@@ -50,12 +91,20 @@ const ProfileModify = (props) => {
       <Header title="프로필 수정" />
 
       <Grid is_flex flex_direction="column" gap="20px" padding="20px">
-        <ProfileImage src={profile} />
-        <Input onChange={(e) => editNickname(e)} />
-        <Input value={address} readOnly onClick={() => setOpen(true)} />
+        <Profile
+          type="file"
+          src={file === "default.img" ? profile : file}
+          ref={imageRef}
+          onChange={setImage}
+        />
+
+        <Input onChange={(e) => editNickname(e)} defaultValue={nickname} />
+        <Input value={address} readOnly onClick={setOpen} />
       </Grid>
 
-      <EditBtn state={state}>완료</EditBtn>
+      <EditBtn state={state} onClick={modifyButton}>
+        완료
+      </EditBtn>
 
       <ReactModal
         isOpen={open}
@@ -88,9 +137,17 @@ const ProfileModify = (props) => {
     </React.Fragment>
   );
 };
-
-const ProfileImage = styled.img`
+const Profile = styled.input`
   width: 120px;
+  height: 120px;
+  border-radius: 60px;
+  border: 0;
+  background-image: url("${(props) => props.src}");
+  background-size: cover;
+  ::-webkit-file-upload-button {
+    display: none;
+  }
+  font-size: 0;
 `;
 
 const EditBtn = styled.button`

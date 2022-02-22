@@ -15,6 +15,7 @@ import {
   MyPageSell,
   MyPageLike,
   Review,
+  SelectConsumer,
 } from "../pages/Index";
 import { Route } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
@@ -24,11 +25,13 @@ import { history } from "../redux/configStore";
 
 function App() {
   const dispatch = useDispatch();
-  React.useEffect(()=>{
+
+  React.useEffect(() => {
     dispatch(userActions.logincheckDB());
-  },[])
-  const user = useSelector(state => state.user.userInfo);
-  console.log(user)
+  }, []);
+
+  const user = useSelector((state) => state.user.userInfo);
+  console.log(user);
 
   return (
     <React.Fragment>
@@ -51,6 +54,11 @@ function App() {
           <Route path="/mypage/sell" exact component={MyPageSell} />
           <Route path="/mypage/like" exact component={MyPageLike} />
           <Route path="/review" exact component={Review} />
+          <Route
+            path="/selectConsumer/:postid"
+            exact
+            component={SelectConsumer}
+          />
         </ConnectedRouter>
       </Container>
     </React.Fragment>

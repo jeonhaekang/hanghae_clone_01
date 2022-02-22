@@ -3,11 +3,19 @@ import Header from "../shared/Header";
 import { Grid, TextLabel } from "../elements/Index";
 import styled from "styled-components";
 import MainCard from "../components/MainCard";
+import { useDispatch, useSelector } from "react-redux";
+import { postActions } from "../redux/modules/Post";
+import { history } from "../redux/configStore";
 
 const MyPageSell = () => {
   const [state, setState] = React.useState(false);
 
-  const test = [1, 2, 3, 4];
+  const dispatch = useDispatch();
+  const postList = useSelector((state) => state.post.list);
+
+  React.useEffect(() => {
+    dispatch(postActions.loadPostDB());
+  }, []);
 
   return (
     <Grid>
@@ -40,22 +48,29 @@ const MyPageSell = () => {
 
       {/* 리스트 */}
       <Grid>
-        {test.map((el) => {
-          return (
-            <React.Fragment key={el}>
-              <MainCard />
-              <Grid
-                is_flex
-                B_bottom="1px solid rgba(0,0,0,0.1)"
-                padding="10px"
-                justify_content="center"
-              >
-                <TextLabel F_size="15px" F_weight="550">
-                  판매중으로 변경
-                </TextLabel>
-              </Grid>
-            </React.Fragment>
-          );
+        {postList.map((el, i) => {
+          if (!state === el.state) {
+            return (
+              <React.Fragment key={i}>
+                <MainCard {...el} />
+                {state && (
+                  <Grid
+                    is_flex
+                    B_bottom="1px solid rgba(0,0,0,0.1)"
+                    padding="10px"
+                    justify_content="center"
+                    _onClick={() =>
+                      history.push("/selectConsumer/" + el.postId)
+                    }
+                  >
+                    <TextLabel F_size="15px" F_weight="550">
+                      판매상태 변경
+                    </TextLabel>
+                  </Grid>
+                )}
+              </React.Fragment>
+            );
+          }
         })}
       </Grid>
     </Grid>

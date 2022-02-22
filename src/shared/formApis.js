@@ -7,7 +7,7 @@ const instance = axios.create({
   baseURL: "http://13.125.53.14:8080",
   headers: {
     "Content-Type": "multipart/form-data",
-    accept: 'application/josn,',
+    accept: "application/josn,",
   },
 });
 
@@ -21,6 +21,9 @@ instance.interceptors.request.use(function (config) {
 const formApis = {
   // 게시글 작성
   posting: (formdata) => instance.post("/post", formdata),
+
+  // 유저정보 수정
+  userInfoModify: (formdata) => instance.put("/myPage/myInfo", formdata),
 };
 
 export default formApis;

@@ -140,10 +140,19 @@ const delPostDB = (postId) => {
   };
 };
 
-const postStateSetDB = (postId, state) => {
+const postStateSetDB = (postId, consumer) => {
   return function (dispatch, getState, { history }) {
     console.log(postId);
-    dispatch(updatePost(postId, { state: !state }));
+    apis
+      .setState(postId, consumer)
+      .then((res) => {
+        dispatch(updatePost(postId, { state: res.data.state }));
+        alert("구매자를 선택하였습니다.");
+        history.replace("/mypage");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 };
 

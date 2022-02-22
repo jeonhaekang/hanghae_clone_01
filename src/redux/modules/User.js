@@ -3,10 +3,12 @@ import { produce } from "immer";
 
 import apis from "../../shared/apis";
 import { setCookie, deleteCookie } from "../../shared/Cookie";
+import formApis from "../../shared/formApis";
 
 // actionCreate
 const SET_USER = "SET_USER";
 const SET_SMAE = "SET_SAME";
+const GET_LIKE_USER = "GET_LIKE_USER";
 
 // action
 const setUser = createAction(SET_USER, (userInfo) => ({ userInfo }));
@@ -78,12 +80,39 @@ const logincheckDB = () => {
   };
 };
 
+const userInfoModifyDB = (image, data) => {
+  return function (dispatch, getState, { history }) {
+    console.log(image, data);
+    const formdata = new FormData();
+    formdata.append("file", image);
+    formdata.append(
+      "info",
+      new Blob([JSON.stringify(data)], { type: "application/json" })
+    );
+
+    formApis
+      .userInfoModify(formdata)
+      .then((res) => {
+        const user = getState().user.userInfo;
+        console.log(user);
+        const reader = new FileReader();
+        reader.readAsDataURL(image);
+        reader.onloadend = () => {};
+        console.log(res);
+        history.replace("/mypage");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
 // reducer
 export default handleActions(
   {
     [SET_USER]: (state, action) =>
       produce(state, (draft) => {
-        console.log("login");
+        draft.userInfo = { ...action.payload.userInfo };
       }),
     [SET_SMAE]: (state, action) =>
       produce(state, (draft) => {
@@ -97,6 +126,7 @@ const userActions = {
   loginDB,
   signupDB,
   logincheckDB,
+  userInfoModifyDB,
 };
 
 export { userActions };

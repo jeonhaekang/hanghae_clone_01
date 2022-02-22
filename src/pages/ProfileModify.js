@@ -99,7 +99,7 @@ const ProfileModify = (props) => {
         />
 
         <Input onChange={(e) => editNickname(e)} defaultValue={nickname} />
-        <Input value={address} readOnly onClick={setOpen} />
+        <Input value={address} readOnly onClick={() => setOpen(true)} />
       </Grid>
 
       <EditBtn state={state} onClick={modifyButton}>

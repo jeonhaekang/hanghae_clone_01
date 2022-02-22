@@ -94,10 +94,13 @@ const userInfoModifyDB = (image, data) => {
       .userInfoModify(formdata)
       .then((res) => {
         const user = getState().user.userInfo;
-        console.log(user);
+
         const reader = new FileReader();
         reader.readAsDataURL(image);
-        reader.onloadend = () => {};
+        reader.onloadend = () => {
+          console.log({ ...data, profileImage: reader.result });
+          dispatch(setUser({ ...data, profileImage: reader.result }));
+        };
         console.log(res);
         history.replace("/mypage");
       })

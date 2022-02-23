@@ -80,8 +80,8 @@ const addPostDB = (data) => {
     const formdata = new FormData();
     let file = getState().image.files[0];
     let user_info = getState().user.userInfo;
-    console.log(user_info)
-    
+    console.log(user_info);
+
     formdata.append("file", file);
     formdata.append(
       "post",
@@ -98,7 +98,7 @@ const addPostDB = (data) => {
         const date = moment().format("YYYY-MM-DD");
 
         dispatch(loadPostDB());
-        history.replace('/main');
+        history.replace("/main");
 
         // dispatch(
         //   addPost({
@@ -132,7 +132,7 @@ const modifyPostDB = (postId, data) => {
       .modifyPost(postId, formdata)
       .then((res) => {
         console.log(res);
-        data = {...data, image: img};
+        data = { ...data, image: img };
         dispatch(updatePost(postId, data));
       })
       .catch((err) => {
@@ -157,7 +157,7 @@ const delPostDB = (postId) => {
 
 const postStateSetDB = (postId, consumer) => {
   return function (dispatch, getState, { history }) {
-    console.log(postId);
+    console.log(postId, consumer);
     apis
       .setState(postId, consumer)
       .then((res) => {
@@ -184,7 +184,7 @@ export default handleActions(
         const postId = action.payload.postId;
         draft.list = draft.list.map((el) => {
           if (el.postId === parseInt(postId)) {
-            return { ...el, ...action.payload.data};
+            return { ...el, ...action.payload.data };
           }
           return el;
         });

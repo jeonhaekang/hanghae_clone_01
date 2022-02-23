@@ -13,8 +13,7 @@ import { history } from "../redux/configStore";
 const MainCard = (props) => {
   const dispatch = useDispatch();
 
-  const { image ,page, user, postId, title, price, likeCnt, state } = props;
-  
+  const { image, page, user, postId, title, price, likeCnt, state } = props;
 
   const [ModalState, setModalState] = React.useState(false);
   const [likeState, setLikeState] = React.useState(false);
@@ -90,13 +89,15 @@ const MainCard = (props) => {
               {likeState ? <IoHeart /> : <IoHeartOutline />}
             </Grid>
           ) : (
-            <Grid
-              _onClick={() => {
-                setModalState(true);
-              }}
-            >
-              <IoEllipsisVertical />
-            </Grid>
+            !state && (
+              <Grid
+                _onClick={() => {
+                  setModalState(true);
+                }}
+              >
+                <IoEllipsisVertical />
+              </Grid>
+            )
           )}
         </Grid>
       </Grid>
@@ -135,7 +136,9 @@ const MainCard = (props) => {
           font_size="16px"
           font_weight="550"
         >
-          <Grid _onClick={() => postStateSet()}>판매상태 변경</Grid>
+          <Grid _onClick={() => history.push("/selectConsumer/" + postId)}>
+            판매상태 변경
+          </Grid>
           <Grid _onClick={() => history.push("/edit/" + postId)}>
             게시글 수정
           </Grid>

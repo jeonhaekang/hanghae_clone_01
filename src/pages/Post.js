@@ -46,16 +46,12 @@ const Post = (props) => {
 
   const posting = () => {
     setDis(true);
-
     let data = {
       title: title,
       content: content,
       category: cat,
       price: price,
     };
-
-    console.log(data);
-
     dispatch(postActions.addPostDB(data));
     history.push("/main");
   };

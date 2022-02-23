@@ -2,22 +2,27 @@ import React from "react";
 import { Grid, TextLabel, Button } from "../elements/Index";
 import { IoHeartOutline, IoHeart } from "react-icons/io5";
 
+import { useSelector } from "react-redux";
 import apis from "../shared/apis";
 
 const DetailFooter = (props) => {
   const { price, postId } = props;
-
+  const userId = useSelector(state => state.user.userInfo.username);
   const [state, setState] = React.useState(false);
 
   React.useEffect(()=>{
-
-  },[state])
+    apis.getLikeUser(postId)
+    .then(res=>{
+      let users = res.data.users;
+      users = users.map(u => {return u.username});
+      setState(users.includes(userId));
+    })
+    .catch(err=>{console.log('err',err)})
+  },[])
 
   const likeBtn = () =>{
     apis.pushLike(postId)
     .then(res => {
-      let data = res.data;
-      console.log(data)
       setState(!state);
     })
     .catch(err => {

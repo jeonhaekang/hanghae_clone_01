@@ -17,6 +17,7 @@ const Start = (props) => {
         left="50%"
         top="50%"
         transform="translate(-50%, -60%)"
+        width="100%"
       >
         <Logo src={logo} />
         <Text width="auto" F_weight="bold" F_size="25px">

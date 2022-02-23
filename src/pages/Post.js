@@ -13,7 +13,24 @@ import { postActions } from "../redux/modules/Post";
 import { imgActions } from "../redux/modules/Image";
 
 const Post = (props) => {
-  const category = ["가전", "노트북", "데스크탑", "장난감", "패션", "집화"];
+  const category = [
+    "디지털기기",
+    "생활가전",
+    "가구/인테리어",
+    "유아동",
+    "생활/가공식품",
+    "유아도서",
+    "스포츠/레저",
+    "여성잡화",
+    "여성의류",
+    "남성패션/잡화",
+    "게임/취미",
+    "뷰티/미용",
+    "반려동물용품",
+    "도서/티켓/음반",
+    "식물",
+    "기타 중고물품",
+  ];
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(imgActions.initPre());
@@ -21,7 +38,7 @@ const Post = (props) => {
 
   // category & modal
   const [open, setOpen] = React.useState(false);
-  const [cat, setCat] = React.useState('');
+  const [cat, setCat] = React.useState("");
 
   // title, content, price
   const [title, setTit] = React.useState("");
@@ -183,7 +200,7 @@ const Post = (props) => {
             />
           </Grid>
 
-          <Grid>
+          <Grid is_flex>
             <input type="checkbox" />
             <div
               style={{

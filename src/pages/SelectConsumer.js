@@ -11,19 +11,19 @@ const SelectConsumer = (props) => {
   const postId = props.match.params.postid;
   console.log(postId);
 
-  let userList = [];
+  const [userList, setUserList] = React.useState([]);
 
-  //   React.useEffect(() => {
-  //     apis
-  //       .getLikeUser()
-  //       .then((res) => {
-  //         console.log(res.data.likeUsers);
-  //         userList = res.data.likeUsers;
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   });
+  React.useEffect(() => {
+    apis
+      .getLikeUser(postId)
+      .then((res) => {
+        console.log(res);
+        setUserList(res.data.users);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const setState = (consumer) => {
     dispatch(postActions.postStateSetDB(postId, consumer));
@@ -34,10 +34,10 @@ const SelectConsumer = (props) => {
       <Header title="구매자 선택" />
       <Grid padding="15px">
         <Grid>어떤분에게 판매하셨나요??</Grid>
-        {userList.map((el) => {
+        {userList.map((el, i) => {
           console.log(el);
           return (
-            <Grid _onClick={setState(el.userid)}>
+            <Grid key={i} _onClick={() => setState(el.id)}>
               <DetailUserCard user={el} />
             </Grid>
           );

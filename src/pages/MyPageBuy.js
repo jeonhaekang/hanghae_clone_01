@@ -9,7 +9,7 @@ import { postActions } from "../redux/modules/Post";
 const MyPageBuy = () => {
   const dispatch = useDispatch();
   const postList = useSelector((state) => state.post.list);
-  const user = useSelector((state) => state.user.userInfo.nickname);
+  const user = useSelector((state) => state.user.userInfo);
 
   console.log(user);
 
@@ -24,7 +24,7 @@ const MyPageBuy = () => {
       <Grid>
         {postList.map((el, i) => {
           console.log(el);
-          if (el.consumer === user) {
+          if (el.consumer === user.id) {
             return (
               <React.Fragment key={i}>
                 <MainCard {...el} />

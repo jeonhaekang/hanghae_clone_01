@@ -31,7 +31,7 @@ const Review = (props) => {
     console.log("test");
     console.log("id : ", post.user.id, "rate : ", state);
     apis
-      .rate({ id: post.user.id, rate: state })
+      .rate({ id: post.user.id, rate: state, PostId: postId })
       .then((res) => {
         console.log(res);
         alert("판매자를 평가하였습니다! 감사합니다.");

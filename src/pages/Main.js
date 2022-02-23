@@ -18,11 +18,10 @@ const Main = (props) => {
   const [state, setState] = React.useState(true);
   const [post, setPost] = React.useState([]);
   const postList = useSelector((state) => state.post.list);
-  console.log(postList);
 
   React.useEffect(() => {
     dispatch(postActions.loadPostDB());
-  },[]);
+  }, []);
 
   React.useEffect(() => {
     if (state) {

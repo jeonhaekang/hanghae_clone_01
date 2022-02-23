@@ -25,21 +25,21 @@ const MyPageBuy = () => {
             return (
               <React.Fragment key={i}>
                 <MainCard {...el} />
-                <Grid
-                  is_flex
-                  B_bottom="1px solid rgba(0,0,0,0.1)"
-                  padding="10px"
-                  justify_content="center"
-                  _onClick={() => {
-                    history.push("/review/" + el.postId);
-                  }}
-                >
-                  {!el.rated && (
+                {!el.rated && (
+                  <Grid
+                    is_flex
+                    B_bottom="1px solid rgba(0,0,0,0.1)"
+                    padding="10px"
+                    justify_content="center"
+                    _onClick={() => {
+                      history.push("/review/" + el.postId);
+                    }}
+                  >
                     <TextLabel F_size="15px" F_weight="550" F_color="#ff7e36">
                       거래 후기 보내기
                     </TextLabel>
-                  )}
-                </Grid>
+                  </Grid>
+                )}
               </React.Fragment>
             );
           }

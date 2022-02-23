@@ -8,7 +8,7 @@ import { postActions } from "../redux/modules/Post";
 import { history } from "../redux/configStore";
 
 const MyPageSell = () => {
-  const [state, setState] = React.useState(false);
+  const [state, setState] = React.useState(true);
 
   const dispatch = useDispatch();
   const postList = useSelector((state) => state.post.list);

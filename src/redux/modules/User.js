@@ -18,11 +18,8 @@ const setSame = createAction(SET_SMAE, (same) => ({ same }));
 const initialState = {
   is_login: false,
   userInfo: {
-<<<<<<< HEAD
     username: 'name',
-=======
     id: null,
->>>>>>> haekang
     nickname: "nick",
     rate: "36.5",
     address: "주소",

@@ -6,6 +6,7 @@ import DetailFooter from "../components/DetailFooter";
 import DetailSlider from "../components/DetailSlider";
 import { useSelector, useDispatch } from "react-redux";
 import { postActions } from "../redux/modules/Post";
+import Header from "../shared/Header";
 
 const Detail = (props) => {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ const Detail = (props) => {
 
   return (
     <React.Fragment>
+      <Header />
       {post && (
         <Grid>
           <DetailSlider image={post.image} />

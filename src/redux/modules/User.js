@@ -77,7 +77,7 @@ const logincheckDB = () => {
       })
       .catch((err) => {
         window.alert("다시 로그인 해주세요!");
-        history.replace("/login");
+        history.replace("/");
         console.log("error from check", err);
       });
   };

@@ -12,6 +12,7 @@ const MyPageSell = () => {
 
   const dispatch = useDispatch();
   const postList = useSelector((state) => state.post.list);
+  const user = useSelector((state) => state.user.userInfo);
 
   React.useEffect(() => {
     dispatch(postActions.loadPostDB());
@@ -49,7 +50,8 @@ const MyPageSell = () => {
       {/* 리스트 */}
       <Grid>
         {postList.map((el, i) => {
-          if (!state === el.state) {
+          console.log(el);
+          if (!state === el.state && el.user.id === user.id) {
             return (
               <React.Fragment key={i}>
                 <MainCard {...el} />

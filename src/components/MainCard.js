@@ -1,17 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import { Grid, TextLabel } from "../elements/Index";
-import test from "../images/test.jpeg";
 import { IoHeartOutline, IoHeart } from "react-icons/io5";
 import { IoEllipsisVertical } from "react-icons/io5";
 import ReactModal from "react-modal";
 import "../shared/App.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { postActions } from "../redux/modules/Post";
 import { history } from "../redux/configStore";
 
 const MainCard = (props) => {
   const dispatch = useDispatch();
+  const login_user = useSelector((state) => state.user.userInfo);
 
   const { image, page, user, postId, title, price, likeCnt, state } = props;
 
@@ -26,10 +26,6 @@ const MainCard = (props) => {
     if (window.confirm("정말로 삭제하시겠습니까?")) {
       dispatch(postActions.delPostDB(postId));
     }
-  };
-
-  const postStateSet = () => {
-    dispatch(postActions.postStateSetDB(postId, state));
   };
 
   return (
@@ -89,7 +85,8 @@ const MainCard = (props) => {
               {likeState ? <IoHeart /> : <IoHeartOutline />}
             </Grid>
           ) : (
-            !state && (
+            !state &&
+            login_user.id === user.id && (
               <Grid
                 _onClick={() => {
                   setModalState(true);

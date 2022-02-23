@@ -48,7 +48,7 @@ const apis = {
   getOnePost: (postId) => instance.get("/post/" + postId),
 
   // 좋아요 등록/해제
-  pushLike : (postId) => instance.post("/like/" + postId),
+  pushLike: (postId) => instance.post("/like/" + postId),
 
   // 좋아요 유저목록 가져오기
   getLikeUser: (postId) => instance.get("/like/list/" + postId),
@@ -57,6 +57,11 @@ const apis = {
   setState: (postId, consumer) =>
     instance.post("/post/state/" + postId, consumer),
 
+  // 판매자 평가
+  rate: (data) => instance.post("/rate", data),
+
+  // 좋아요 유저 목록
+  likeList: () => instance.get("/like/list"),
 };
 
 export default apis;

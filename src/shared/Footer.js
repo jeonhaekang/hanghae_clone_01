@@ -7,8 +7,15 @@ import { IoNewspaperOutline, IoNewspaperSharp } from "react-icons/io5";
 import { IoLogOutOutline } from "react-icons/io5";
 import { history } from "../redux/configStore";
 import styled, { keyframes } from "styled-components";
+import { deleteCookie } from "./Cookie";
 
 const Footer = (props) => {
+  const logout = () => {
+    deleteCookie("authorization");
+    alert("로그아웃 하였습니다.");
+    history.replace("/");
+  };
+
   return (
     <React.Fragment>
       <Grid
@@ -32,7 +39,13 @@ const Footer = (props) => {
           <RiHomeLine />
           <TextLabel>홈</TextLabel>
         </Grid>
-        <Grid is_flex flex_direction="column">
+        <Grid
+          is_flex
+          flex_direction="column"
+          _onClick={() => {
+            history.push("/mypage/sell");
+          }}
+        >
           <IoNewspaperOutline />
           <TextLabel>나의상품</TextLabel>
         </Grid>
@@ -50,7 +63,7 @@ const Footer = (props) => {
           <IoPersonOutline />
           <TextLabel>나의 당근</TextLabel>
         </Grid>
-        <Grid is_flex flex_direction="column">
+        <Grid is_flex flex_direction="column" _onClick={logout}>
           <IoLogOutOutline />
           <TextLabel>로그아웃</TextLabel>
         </Grid>

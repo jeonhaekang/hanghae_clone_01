@@ -53,7 +53,7 @@ function App() {
           <Route path="/mypage/buy" exact component={MyPageBuy} />
           <Route path="/mypage/sell" exact component={MyPageSell} />
           <Route path="/mypage/like" exact component={MyPageLike} />
-          <Route path="/review" exact component={Review} />
+          <Route path="/review/:postid" exact component={Review} />
           <Route
             path="/selectConsumer/:postid"
             exact

@@ -58,7 +58,7 @@ const Main = (props) => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid>
+      <Grid padding='0 0 56px' >
         {postList.map((el, i) => {
           return <MainCard {...el} key={i} />;
         })}

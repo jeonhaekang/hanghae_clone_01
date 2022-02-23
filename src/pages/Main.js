@@ -16,12 +16,26 @@ import { postActions } from "../redux/modules/Post";
 const Main = (props) => {
   const dispatch = useDispatch();
   const [state, setState] = React.useState(true);
+  const [post, setPost] = React.useState([]);
   const postList = useSelector((state) => state.post.list);
   console.log(postList);
-  
+
   React.useEffect(() => {
     dispatch(postActions.loadPostDB());
-  }, []);
+  },[]);
+
+  React.useEffect(() => {
+    if (state) {
+      setPost(postList);
+    } else {
+      const filter = postList.filter((el) => {
+        if (el.state === false) {
+          return true;
+        }
+      });
+      setPost(filter);
+    }
+  }, [state, postList]);
 
   return (
     <React.Fragment>
@@ -58,8 +72,8 @@ const Main = (props) => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid padding='0 0 56px' >
-        {postList.map((el, i) => {
+      <Grid>
+        {post.map((el, i) => {
           return <MainCard {...el} key={i} />;
         })}
       </Grid>

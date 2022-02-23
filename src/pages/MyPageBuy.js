@@ -11,8 +11,6 @@ const MyPageBuy = () => {
   const postList = useSelector((state) => state.post.list);
   const user = useSelector((state) => state.user.userInfo);
 
-  console.log(user);
-
   React.useEffect(() => {
     dispatch(postActions.loadPostDB());
   }, []);
@@ -23,8 +21,7 @@ const MyPageBuy = () => {
       {/* 리스트 */}
       <Grid>
         {postList.map((el, i) => {
-          console.log(el);
-          if (el.consumer === user.id) {
+          if (parseInt(el.consumer) === user.id) {
             return (
               <React.Fragment key={i}>
                 <MainCard {...el} />
@@ -34,12 +31,14 @@ const MyPageBuy = () => {
                   padding="10px"
                   justify_content="center"
                   _onClick={() => {
-                    history.push("/review");
+                    history.push("/review/" + el.postId);
                   }}
                 >
-                  <TextLabel F_size="15px" F_weight="550" F_color="#ff7e36">
-                    거래 후기 보내기
-                  </TextLabel>
+                  {!el.rated && (
+                    <TextLabel F_size="15px" F_weight="550" F_color="#ff7e36">
+                      거래 후기 보내기
+                    </TextLabel>
+                  )}
                 </Grid>
               </React.Fragment>
             );

@@ -9,106 +9,152 @@ import good from "../images/review/good.png";
 import goodColor from "../images/review/goodcolor.png";
 import veryGood from "../images/review/verygood.png";
 import veryGoodColor from "../images/review/verygoodcolor.png";
+import apis from "../shared/apis";
+import { useSelector, useDispatch } from "react-redux";
+import { history } from "../redux/configStore";
 
-const Review = () => {
+const Review = (props) => {
+  const postId = props.match.params.postid;
+  const user = useSelector((state) => state.user.userInfo);
+  console.log(postId);
   const [state, setState] = React.useState(null);
-  
+
+  const [post, setPost] = React.useState(null);
+
+  React.useEffect(() => {
+    apis.getOnePost(postId).then((res) => {
+      setPost(res.data);
+    });
+  }, []);
+
+  const selectRate = () => {
+    console.log("test");
+    console.log("id : ", post.user.id, "rate : ", state);
+    apis
+      .rate({ id: post.user.id, rate: state })
+      .then((res) => {
+        console.log(res);
+        alert("판매자를 평가하였습니다! 감사합니다.");
+        history.replace("/mypage");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  console.log(post);
+
   return (
     <React.Fragment>
       <Header />
-      <Grid>
-        <Grid
-          is_flex
-          padding="15px"
-          gap="15px"
-          B_bottom="1px solid rgba(0,0,0,0.1)"
-        >
-          <Grid width="13%">
-            <AspectInner src={test} />
-          </Grid>
+      {post && (
+        <Grid>
           <Grid
             is_flex
+            padding="15px"
+            gap="15px"
+            B_bottom="1px solid rgba(0,0,0,0.1)"
+          >
+            <Grid width="13%">
+              <AspectInner src={post.image} />
+            </Grid>
+            <Grid
+              is_flex
+              flex_direction="column"
+              align_items="flex-start"
+              gap="5px"
+            >
+              <TextLabel F_size="15px" F_weight="bold">
+                {post.title}
+              </TextLabel>
+              <TextLabel F_weight="500">{post.price}원</TextLabel>
+            </Grid>
+          </Grid>
+
+          <Grid
+            is_flex
+            padding="15px"
+            gap="12px"
+            font_weight="600"
             flex_direction="column"
             align_items="flex-start"
-            gap="5px"
           >
-            <TextLabel F_size="15px" F_weight="bold">
-              상품 타이틀
-            </TextLabel>
-            <TextLabel F_weight="500">거래한 이웃 상대방 닉네임</TextLabel>
-          </Grid>
-        </Grid>
+            <Grid>
+              <TextLabel F_size="16px" F_weight="bold">
+                {user.nickname}님, <br />
+                이번 거래는 어떠셨나요?
+              </TextLabel>
+            </Grid>
+            <Grid color="rgba(0,0,0,0.6)">
+              <TextLabel F_size="13px">
+                거래선호도는 나만 볼 수 있어요.
+              </TextLabel>
+            </Grid>
 
-        <Grid is_flex padding="15px" gap="12px" font_weight="600">
-          <Grid>
-            <TextLabel F_size="16px" F_weight="bold">
-              godgooddog님, <br />
-              상대방 닉네임님과 거래가 어떠셨나요?
-            </TextLabel>
-          </Grid>
-          <Grid color="rgba(0,0,0,0.6)">
-            <TextLabel F_size="13px">거래선호도는 나만 볼 수 있어요.</TextLabel>
+            <Grid
+              is_flex
+              justify_content="space-around"
+              width="100%"
+              color="#DEDEE2"
+              font_weight="bold"
+            >
+              <Grid
+                is_flex
+                flex_direction="column"
+                gap="10px"
+                _onClick={() => setState(-1)}
+              >
+                <Image src={state === -1 ? badColor : bad} />
+                <TextLabel F_color={state === -1 && "#888A93"}>
+                  별로예요
+                </TextLabel>
+              </Grid>
+              <Grid
+                is_flex
+                flex_direction="column"
+                gap="10px"
+                _onClick={() => setState(0)}
+              >
+                <Image src={state === 0 ? goodColor : good} />
+                <TextLabel F_color={state === 0 && "#2FB791"}>좋아요</TextLabel>
+              </Grid>
+              <Grid
+                is_flex
+                flex_direction="column"
+                gap="10px"
+                _onClick={() => setState(1)}
+              >
+                <Image src={state === 1 ? veryGoodColor : veryGood} />
+                <TextLabel F_color={state === 1 && "#F6793A"}>
+                  최고예요
+                </TextLabel>
+              </Grid>
+            </Grid>
           </Grid>
 
           <Grid
-            is_flex
-            justify_content="space-around"
+            position="fixed"
+            bottom="0"
             width="100%"
-            color="#DEDEE2"
+            padding="15px"
+            color="white"
             font_weight="bold"
+            font_size="15px"
           >
-            <Grid
-              is_flex
-              flex_direction="column"
-              gap="10px"
-              _onClick={() => setState(-1)}
+            <Button
+              width="100%"
+              padding="10px"
+              Border="0"
+              BG_color={state !== null ? "#F6793A" : "#DEDEE2"}
+              B_radius="5px"
+              disabled={state !== null ? false : true}
+              _onClick={selectRate}
             >
-              <Image src={state === -1 ? badColor : bad} />
-              <TextLabel F_color={state === -1 && "#888A93"}>
-                별로예요
-              </TextLabel>
-            </Grid>
-            <Grid
-              is_flex
-              flex_direction="column"
-              gap="10px"
-              _onClick={() => setState(0)}
-            >
-              <Image src={state === 0 ? goodColor : good} />
-              <TextLabel F_color={state === 0 && "#2FB791"}>좋아요</TextLabel>
-            </Grid>
-            <Grid
-              is_flex
-              flex_direction="column"
-              gap="10px"
-              _onClick={() => setState(1)}
-            >
-              <Image src={state === 1 ? veryGoodColor : veryGood} />
-              <TextLabel F_color={state === 1 && "#F6793A"}>최고예요</TextLabel>
-            </Grid>
+              후기 보내기
+            </Button>
           </Grid>
         </Grid>
-
-        <Grid
-          position="fixed"
-          bottom="0"
-          width="100%"
-          padding="15px"
-          color="white"
-          font_weight="bold"
-          font_size="15px"
-        >
-          <Button
-            width="100%"
-            padding="10px"
-            Border="0"
-            BG_color={state !== null ? "#F6793A" : "#DEDEE2"}
-            B_radius="5px"
-          >
-            후기 보내기
-          </Button>
-        </Grid>
-      </Grid>
+      )}
     </React.Fragment>
   );
 };

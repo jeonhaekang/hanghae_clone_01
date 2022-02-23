@@ -1,11 +1,11 @@
 import React from "react";
 import { Grid, TextLabel, Image } from "../elements/Index";
 import Rate from "../components/Rate";
+import profile from "../images/profile.jpeg";
 
 const DetailUserCard = (props) => {
   const { user } = props;
 
-  console.log(user);
   return (
     <Grid
       B_bottom="1px solid rgba(0,0,0,0.1)"
@@ -15,7 +15,13 @@ const DetailUserCard = (props) => {
     >
       <Grid is_flex gap="10px">
         <Grid>
-          <Image shape="circle" size="45" src={user.profileImage} />
+          <Image
+            shape="circle"
+            size="45"
+            src={
+              user.profileImage === "default.img" ? profile : user.profileImage
+            }
+          />
         </Grid>
         <Grid
           is_flex
